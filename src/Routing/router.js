@@ -12,6 +12,7 @@ export const Router = [
       { path: "/about", element: <About /> },
       { path: "/contact", element: <Contact /> },
       { path: "/gallery", element: <Gallery /> },
+      { path: "/hostwedding", element: <Gallery /> },
     ],
   },
 ];
