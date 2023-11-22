@@ -955,6 +955,7 @@ ul.dropdown-menu li {
   color: #ffffff;
   border: solid 2px #ffffff;
 }
+
 /*-- //footer --*/
 /*-- copyright --*/
 .copyright {
@@ -2535,3 +2536,25 @@ i.fa.fa-pencil {
   }
 }
 /*-- //responsive --*/
+
+.btn2 {
+  color: #ffffff;
+  font-size: 0.9em;
+  border: none;
+  padding: 0.5em 1em;
+  text-align: center;
+  text-decoration: none;
+  background: #ff5722;
+  border: solid 2px #ff5722;
+  transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  -ms-transition: 0.5s all;
+}
+
+.btn2:hover {
+  background: none;
+  color: #ffffff;
+  border: solid 2px #ffffff;
+}

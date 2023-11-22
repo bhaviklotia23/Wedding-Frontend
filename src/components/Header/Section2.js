@@ -78,9 +78,22 @@ const Section2 = () => {
                 </li>
               </ul>
 
-              <ul class="nav navbar-nav link-effect-4">
+              {/* <ul class="nav navbar-nav link-effect-4">
                 <li class={`first-list`}>
-                  <Link onClick={handleClickOpen} to="">
+                  <Link onClick={handleClickOpen} to="" >
+                    Host Wedding
+                  </Link>
+                </li>
+              </ul> */}
+
+              <ul class="nav navbar-nav link-effect-4">
+                <li
+                  class={`${link === "/host_wedding" && "active "}first-list`}
+                >
+                  <Link
+                    onClick={() => handleNavLinkClick("/host_wedding")}
+                    to="/host_wedding"
+                  >
                     Host Wedding
                   </Link>
                 </li>
