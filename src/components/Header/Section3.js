@@ -2,6 +2,21 @@ import React from "react";
 
 const Section3 = () => {
   return (
+    <div
+    className="banner jarallax"
+    style={{
+      position: "absolute",
+      top: "0px",
+      left: "0px",
+      width: "100%",
+      height: "100%",
+      overflow: "hidden",
+      transition: "transform 0s linear -1ms",
+      // visibility: "hidden",
+      zIndex: " -100",
+      marginTop: "85px",
+    }}
+  >
     <div className="w3layouts-banner-slider">
       <div className="container">
         <div className="slider">
@@ -81,6 +96,7 @@ const Section3 = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

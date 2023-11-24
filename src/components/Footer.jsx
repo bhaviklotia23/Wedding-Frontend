@@ -10,7 +10,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Footer = () => {
   return (
-    <div>
+    <div
+    style={{
+      minHeight: "calc(100vh - 40vh)",
+      overflow: "hidden",
+      width: "100%",
+      marginTop: "275px",
+    }}
+    >
       <div class="footer-bottom">
         <div class="container">
           <div class="w3agile_footer_grids">
@@ -128,6 +135,7 @@ const Footer = () => {
         </div>
       </div>
     </div>
+    
   );
 };
 

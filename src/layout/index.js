@@ -6,14 +6,7 @@ const Layout = () => {
   return (
     <React.Fragment>
       <Header />
-      <div
-        style={{
-          minHeight: "calc(100vh - 40vh)",
-          overflow: "hidden",
-          width: "100%",
-          marginTop: "275px",
-        }}
-      >
+      <div>
         <div
           style={{
             display: "block",

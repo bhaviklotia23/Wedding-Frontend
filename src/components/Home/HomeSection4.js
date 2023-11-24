@@ -9,7 +9,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const HomeSection4 = () => {
   return (
-    <div>
+    <div
+      style={{
+        minHeight: "calc(100vh - 40vh)",
+        overflow: "hidden",
+        width: "100%",
+      }}
+    >
       <div class="news">
         <div class="container">
           <div class="w3-heading-grid">

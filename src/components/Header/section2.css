@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+  }
+  .fadeIn {
+    opacity: 0;
+  }
+  
+  .fadeIn-animated {
+    animation: fadein 0.8s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 1s;
+    opacity: 1;
+    color: blue;
+  }
+  
+  @keyframes fadein {
+    from {
+      opacity: 0;
+      transform: translateY(1em) scale(1);
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes zoomInAndShow {
+    0% {
+      opacity: 0;
+    }
+    25% {
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  /* .box {
+    height: 80vh;
+    width: 100vw;
+    background: url("https://res.cloudinary.com/dremexhzf/image/upload/v1633860620/picture-testing_szctm5.png");
+    background-position: center;
+    background-size: cover;
+    animation: zoomInAndShow 0.8s;
+    animation-timing-function: ease-in-out;
+  } */
+  
