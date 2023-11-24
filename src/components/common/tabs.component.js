@@ -71,7 +71,7 @@ export default function ColorTabs({ count }) {
       </CustomTabs>
       {Array.from({ length: count }, (_, index) => (
         <CustomTabPanel key={index} value={value} index={index}>
-          <WeddingDayForm />
+          <WeddingDayForm dayCount={value} />
         </CustomTabPanel>
       ))}
     </Box>

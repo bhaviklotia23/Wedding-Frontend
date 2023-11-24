@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import CustomizedSwitch from "../switch.component";
 import ColorTabs from "../tabs.component";
+import CustomCounter from "../counter.component";
 
 const Step3 = () => {
   const [value, setValue] = useState(1);
@@ -35,6 +36,14 @@ const Step3 = () => {
 
   return (
     <Box sx={{ width: "100%" }}>
+      <Typography
+        sx={{
+          fontWeight: "bold",
+          fontSize: "2.5em",
+        }}
+      >
+        Wedding Details
+      </Typography>
       <Grid
         direction={{ xs: "column", md: "row" }}
         sx={{ display: "flex", justifyContent: "center" }}
@@ -52,74 +61,18 @@ const Step3 = () => {
               marginTop: "1rem",
             }}
           >
+            <CustomCounter
+              handleDecrement={handleDecrement}
+              handleIncrement={handleIncrement}
+              value={value}
+              title="Wedding Days"
+            />
             <Stack>
               <Typography
                 sx={{
                   display: "flex",
                   justifyContent: "flex-start",
-                  margin: "0.5rem 0 0.5rem 0",
-                  fontWeight: "bold",
-                }}
-              >
-                Wedding Days
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginRight: "3rem",
-                }}
-              >
-                <Button
-                  onClick={handleDecrement}
-                  variant="outlined"
-                  sx={{
-                    borderColor: "black",
-                    background: "#ff5722",
-                    color: "white",
-                    "&:hover": {
-                      background: "black",
-                    },
-                  }}
-                >
-                  <Typography sx={{ color: "white" }}>-</Typography>
-                </Button>
-                <TextField
-                  type="text"
-                  color="warning"
-                  value={value}
-                  readOnly
-                  sx={{
-                    width: "7ch",
-                    display: "flex",
-                    mx: 1,
-                    textAlign: "center", // Center the text in TextField
-                  }}
-                />
-
-                <Button
-                  onClick={handleIncrement}
-                  variant="outlined"
-                  sx={{
-                    borderColor: "black",
-                    background: "#ff5722",
-                    color: "white",
-                    "&:hover": {
-                      background: "black",
-                    },
-                  }}
-                >
-                  <Typography sx={{ color: "white" }}>+</Typography>
-                </Button>
-              </Box>
-            </Stack>
-            <Stack>
-              <Typography
-                sx={{
-                  display: "flex",
-                  justifyContent: "flex-start",
-                  margin: "0.5rem 0 0.5rem 0",
+                  margin: "1.5rem 0 1rem 0",
                   fontWeight: "bold",
                 }}
               >
@@ -144,7 +97,7 @@ const Step3 = () => {
                 sx={{
                   display: "flex",
                   justifyContent: "flex-start",
-                  margin: "0.5rem 0 0.5rem 0",
+                  margin: "1.5rem 0 1rem 0",
                   fontWeight: "bold",
                 }}
               >
@@ -164,7 +117,7 @@ const Step3 = () => {
       <Grid
         container
         direction={{ xs: "column", md: "row" }}
-        sx={{ display: "flex", justifyContent: "center", marginTop:"3ch" }}
+        sx={{ display: "flex", justifyContent: "center", marginTop: "3ch" }}
         rowSpacing={2}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >

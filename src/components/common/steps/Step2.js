@@ -7,8 +7,16 @@ const Step2 = () => {
 
   return (
     <>
-      <Box>
-        <Typography sx={{ margin: "0.5rem 0 0.5rem 0", fontWeight: "bold" }}>
+      <Box sx={{ width: "100%" }}>
+        <Typography
+          sx={{
+            fontWeight: "bold",
+            fontSize: "2.5em",
+          }}
+        >
+          Couple Memories
+        </Typography>
+        <Typography sx={{ margin: "1.5rem 0 1rem 0", fontWeight: "bold" }}>
           Your Story
         </Typography>
         <Stack
@@ -30,7 +38,7 @@ const Step2 = () => {
         </Stack>
       </Box>
       <Box>
-        <Typography sx={{ margin: "0.5rem 0 0.5rem 0", fontWeight: "bold" }}>
+        <Typography sx={{ margin: "1.5rem 0 1rem 0", fontWeight: "bold" }}>
           Video URL
         </Typography>
         <Stack

@@ -39,8 +39,16 @@ const Step1 = () => {
           </FormControl>
         </Stack>
       </Box> */}
-      <Box>
-        <Typography sx={{ margin: "0.5rem 0 0.5rem 0", fontWeight: "bold" }}>
+      <Box sx={{ width: "100%" }}>
+        <Typography
+          sx={{
+            fontWeight: "bold",
+            fontSize: "2.5em",
+          }}
+        >
+          Personal Details
+        </Typography>
+        <Typography sx={{ margin: "1.5rem 0 1rem 0", fontWeight: "bold" }}>
           Groom's Details
         </Typography>
         <Stack
@@ -75,7 +83,7 @@ const Step1 = () => {
         </Stack>
       </Box>
       <Box>
-        <Typography sx={{ margin: "0.5rem 0 0.5rem 0", fontWeight: "bold" }}>
+        <Typography sx={{ margin: "1.5rem 0 1rem 0", fontWeight: "bold" }}>
           Bride's Details
         </Typography>
         <Stack
