@@ -3,7 +3,13 @@ import AboutImage from "../../images/6.jpg";
 
 const AboutSection1 = () => {
   return (
-    <div className="w3l-about-top">
+    <div
+    style={{
+      overflow: "hidden",
+      width: "100%",
+      marginTop: "100px",
+    }}
+    >
       <div className="container">
         <div className="w3ls-about-info">
           <img src={AboutImage} alt="" />

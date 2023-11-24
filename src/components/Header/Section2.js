@@ -5,6 +5,7 @@ import StepperComponent from "../common/stepper.component";
 import Step1 from "../common/steps/Step1";
 import Step2 from "../common/steps/Step2";
 import Step3 from "../common/steps/Step3";
+import Login from "../../pages/Login/Login";
 
 const Section2 = () => {
   const location = useLocation();
@@ -12,6 +13,16 @@ const Section2 = () => {
 
   const [activeLink, setActiveLink] = useState(link || "/");
   const [open, setOpen] = useState(false);
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   useEffect(() => {
     if (location.pathname.includes(activeLink)) {
@@ -64,15 +75,21 @@ const Section2 = () => {
               id="bs-example-navbar-collapse-1"
             >
               <ul class="nav navbar-nav link-effect-4">
-                <li class="first-list">
-                  <button onClick={() => handleNavLinkClick("/contact")}>
+                <li class="first-list" style={{ backgroundColor: "white" }}>
+                  <button
+                    onClick={handleOpenModal}
+                    style={{ backgroundColor: "white", color: "#ff5722" }}
+                  >
                     Login
                   </button>
                 </li>
               </ul>
               <ul class="nav navbar-nav link-effect-4">
-                <li class="first-list">
-                  <button onClick={() => handleNavLinkClick("/contact")}>
+                <li class="first-list" style={{ backgroundColor: "white" }}>
+                  <button
+                    onClick={handleOpenModal}
+                    style={{ backgroundColor: "white", color: "#ff5722" }}
+                  >
                     Register
                   </button>
                 </li>
@@ -89,10 +106,12 @@ const Section2 = () => {
               <ul class="nav navbar-nav link-effect-4">
                 <li
                   class={`${link === "/host_wedding" && "active "}first-list`}
+                  style={{ backgroundColor: "white" }}
                 >
                   <Link
                     onClick={() => handleNavLinkClick("/host_wedding")}
                     to="/host_wedding"
+                    style={{ backgroundColor: "white", color: "#ff5722" }}
                   >
                     Host Wedding
                   </Link>
@@ -100,10 +119,14 @@ const Section2 = () => {
               </ul>
 
               <ul class="nav navbar-nav link-effect-4">
-                <li class={`${link === "/contact" && "active "}first-list`}>
+                <li
+                  class={`${link === "/contact" && "active "}first-list`}
+                  style={{ backgroundColor: "white" }}
+                >
                   <Link
                     onClick={() => handleNavLinkClick("/contact")}
                     to="/contact"
+                    style={{ backgroundColor: "white", color: "#ff5722" }}
                   >
                     Contact
                   </Link>
@@ -111,17 +134,28 @@ const Section2 = () => {
               </ul>
 
               <ul class="nav navbar-nav link-effect-4">
-                <li class={`${link === "/blog" && "active "}first-list`}>
-                  <Link onClick={() => handleNavLinkClick("/blog")} to="/blog">
+                <li
+                  class={`${link === "/blog" && "active "}first-list`}
+                  style={{ backgroundColor: "white" }}
+                >
+                  <Link
+                    onClick={() => handleNavLinkClick("/blog")}
+                    to="/blog"
+                    style={{ backgroundColor: "white", color: "#ff5722" }}
+                  >
                     Blog
                   </Link>
                 </li>
               </ul>
               <ul class="nav navbar-nav link-effect-4">
-                <li class={`${link === "/gallery" && "active "}first-list`}>
+                <li
+                  class={`${link === "/gallery" && "active "}first-list`}
+                  style={{ backgroundColor: "white" }}
+                >
                   <Link
                     onClick={() => handleNavLinkClick("/gallery")}
                     to="/gallery"
+                    style={{ backgroundColor: "white", color: "#ff5722" }}
                   >
                     Gallery
                   </Link>
@@ -129,10 +163,14 @@ const Section2 = () => {
               </ul>
 
               <ul class="nav navbar-nav link-effect-4">
-                <li class={`${link === "/about" && "active "}first-list`}>
+                <li
+                  class={`${link === "/about" && "active "}first-list`}
+                  style={{ backgroundColor: "white" }}
+                >
                   <Link
                     onClick={() => handleNavLinkClick("/about")}
                     to="/about"
+                    style={{ backgroundColor: "white", color: "#ff5722" }}
                   >
                     About
                   </Link>
@@ -140,8 +178,15 @@ const Section2 = () => {
               </ul>
 
               <ul class="nav navbar-nav link-effect-4">
-                <li class={`${link === "/" && "active "}first-list`}>
-                  <Link onClick={() => handleNavLinkClick("/")} to="/">
+                <li
+                  class={`${link === "/" && "active "}first-list`}
+                  style={{ backgroundColor: "white" }}
+                >
+                  <Link
+                    onClick={() => handleNavLinkClick("/")}
+                    to="/"
+                    style={{ backgroundColor: "white", color: "#ff5722" }}
+                  >
                     Home
                   </Link>
                 </li>
@@ -153,6 +198,12 @@ const Section2 = () => {
       <CustomDialog open={open} setOpen={setOpen} handleClose={handleClose}>
         <StepperComponent />
       </CustomDialog>
+
+      <Login
+        open={openModal}
+        setOpen={setOpenModal}
+        handleClose={handleCloseModal}
+      />
     </>
   );
 };
