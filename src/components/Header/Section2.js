@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import CustomDialog from "../common/dialog.component";
 import StepperComponent from "../common/stepper.component";
-import Step1 from "../common/steps/Step1";
-import Step2 from "../common/steps/Step2";
-import Step3 from "../common/steps/Step3";
 import Login from "../../pages/Login/Login";
 
 const Section2 = () => {

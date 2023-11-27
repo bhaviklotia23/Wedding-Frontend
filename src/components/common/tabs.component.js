@@ -4,7 +4,6 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import styled from "@emotion/styled";
 import { Typography } from "@mui/material";
-import WeddingDayForm from "./steps/WeddingDayForm";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -33,7 +32,13 @@ function a11yProps(index) {
   };
 }
 
-export default function ColorTabs({ count }) {
+export default function ColorTabs({
+  count,
+  title,
+  children,
+  tabValue,
+  setTabValue,
+}) {
   const CustomTab = styled(Tab)(({ theme }) => ({
     "&.Mui-selected": {
       color: "#ff5722", // Change this to the desired color
@@ -46,22 +51,24 @@ export default function ColorTabs({ count }) {
     },
   }));
 
-  const [value, setValue] = React.useState(0);
-
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setTabValue(newValue);
   };
 
   const renderTabs = () => {
     return Array.from({ length: count }, (_, index) => (
-      <CustomTab key={index} label={`Day ${index + 1}`} {...a11yProps(index)} />
+      <CustomTab
+        key={index}
+        label={`${title} ${index + 1}`}
+        {...a11yProps(index)}
+      />
     ));
   };
 
   return (
     <Box sx={{ width: "100%" }}>
       <CustomTabs
-        value={value}
+        value={tabValue}
         onChange={handleChange}
         textColor="secondary"
         indicatorColor="secondary"
@@ -70,8 +77,8 @@ export default function ColorTabs({ count }) {
         {renderTabs()}
       </CustomTabs>
       {Array.from({ length: count }, (_, index) => (
-        <CustomTabPanel key={index} value={value} index={index}>
-          <WeddingDayForm dayCount={value} />
+        <CustomTabPanel key={index} value={tabValue} index={index}>
+          {children}
         </CustomTabPanel>
       ))}
     </Box>
