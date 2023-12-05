@@ -1,7 +1,7 @@
 import axios from "axios";
-import { BASE_URL } from "../config/api";
+import { API_URL } from "../config/api";
 
 export const createWedding = async () => {
-  const response = await axios.post(`${BASE_URL}`);
+  const response = await axios.post(`${API_URL}`);
   return response;
 };

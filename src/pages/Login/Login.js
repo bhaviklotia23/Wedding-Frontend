@@ -24,6 +24,7 @@ import { useFormik } from 'formik';
 import { Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import "./animation.css"
+import { LoginApi } from "../../api/auth/login";
 
 
 
@@ -80,6 +81,9 @@ const Login = ({ open, handleClose, setOpen }) => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
 
+  const LoginData = JSON.parse(localStorage.getItem("userData"));
+
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -87,7 +91,6 @@ const Login = ({ open, handleClose, setOpen }) => {
 
   const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email address').required('Required'),
-    name: Yup.string().required('Required'),
     password: Yup.string().required('Required').min(6, 'Password must be at least 6 characters'),
   });
 
@@ -95,16 +98,22 @@ const Login = ({ open, handleClose, setOpen }) => {
   const formik = useFormik({
     initialValues: {
       email: '',
-      name: '',
       password: '',
     },
     validationSchema,
-    onSubmit: (values, { resetForm }) => {
-      resetForm();
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
+      try {
+        const response = await LoginApi(values); 
+        handleClose();
+        resetForm();
+      } catch (error) {
+        console.error('Login error:', error);
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 
-  console.log("formik", formik)
 
 
 
@@ -191,41 +200,7 @@ const Login = ({ open, handleClose, setOpen }) => {
                                 </div>
                               </Box>
 
-                              <Box sx={{ marginBottom: "10px" }}>
-                                <div>
-                                  <Field
-                                    type="name"
-                                    id="name"
-                                    name="name"
-                                    placeHolder="Name"
-                                    className="name-input"
-                                    onChange={formik.handleChange}
-                                    value={formik.values.name}
-                                    style={{
-                                      width: "100%",
-                                      height: "40px",
-                                      backgroundColor: "#e4e4e4",
-                                      borderRadius: "5px",
-                                      border: "1px solid #898686",
-                                    }
-                                    }
-                                  />
-                                  {formik.errors.name ? ( 
-                                    <ErrorMessage
-                                      name="name"
-                                      component="div"
-                                      style={{
-                                        marginTop: "5px",
-                                        color: "red",
-                                        fontSize: "15px"
-                                      }}
-                                    />
-                                  ) : (
-                                    <></>
-                                  )}
-
-                                </div>
-                              </Box>
+                             
 
                               <Box sx={{ marginBottom: "10px" }}>
                                 <div>

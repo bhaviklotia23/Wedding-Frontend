@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import CustomDialog from "../common/dialog.component";
 import StepperComponent from "../common/stepper.component";
 import Login from "../../pages/Login/Login";
+import { LogOutApi, LoginApi } from "../../api/auth/login";
 
 const Section2 = () => {
   const location = useLocation();
@@ -39,7 +40,17 @@ const Section2 = () => {
     setOpen(false);
   };
 
-  console.log(link === activeLink, "link");
+  const LoginData = JSON.parse(localStorage.getItem("userData"));
+
+  const LogOut = async () => {
+    try {
+      await LogOutApi();
+  
+      localStorage.removeItem('userData');
+    } catch (error) {
+    }
+  };
+ 
 
   return (
     <>
@@ -71,7 +82,8 @@ const Section2 = () => {
               class="collapse navbar-collapse"
               id="bs-example-navbar-collapse-1"
             >
-              <ul class="nav navbar-nav link-effect-4">
+              {!LoginData?.token ? (
+                <ul class="nav navbar-nav link-effect-4">
                 <li class="first-list" style={{ backgroundColor: "white" }}>
                   <button
                     onClick={handleOpenModal}
@@ -81,7 +93,24 @@ const Section2 = () => {
                   </button>
                 </li>
               </ul>
+              ):
+              <>
               <ul class="nav navbar-nav link-effect-4">
+                <li class="first-list" style={{ backgroundColor: "white" }}>
+                  <button
+                  onClick={LogOut}
+                    style={{ backgroundColor: "white", color: "#ff5722" }}
+                  >
+                    LogOut
+                  </button>
+                </li>
+              </ul>
+              </>
+              }
+              
+              {!LoginData?.token 
+              ? (
+                <ul class="nav navbar-nav link-effect-4">
                 <li class="first-list" style={{ backgroundColor: "white" }}>
                   <button
                     onClick={handleOpenModal}
@@ -91,6 +120,9 @@ const Section2 = () => {
                   </button>
                 </li>
               </ul>
+              ) :null
+            }
+             
 
               {/* <ul class="nav navbar-nav link-effect-4">
                 <li class={`first-list`}>
