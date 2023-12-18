@@ -8,7 +8,7 @@ const AboutSection3 = () => {
   return (
     <div className="team">
       <div className="container">
-        <div className="w3-heading-grid">
+        {/* <div className="w3-heading-grid">
           <h3>Our Team</h3>
           <div className="agileits-border"> </div>
         </div>
@@ -134,7 +134,7 @@ const AboutSection3 = () => {
             <span>Nulla molestie</span>
           </div>
           <div className="clearfix" />
-        </div>
+        </div> */}
       </div>
     </div>
   );
