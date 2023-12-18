@@ -20,6 +20,14 @@ import Input from "../../components/common/Input";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import AnimatedImage from "./AnimatedImage";
+import { useFormik } from 'formik';
+import { Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import "./animation.css"
+import { LoginApi } from "../../api/auth/login";
+
+
+
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -47,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   typography: {
     fontSize: "25px !important",
     fontWeight: "600 !important",
-    color:"rgb(255, 87, 34)"
+    color: "rgb(255, 87, 34)"
   },
 }));
 
@@ -64,20 +72,51 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     maxWidth: "1040px",
     height: "480px",
   },
-  "& .MuiButton-root:hover" : {
-    backgroundColor:"rgb(255, 87, 34) !important"
+  "& .MuiButton-root:hover": {
+    backgroundColor: "rgb(255, 87, 34) !important"
   }
 }));
 
 const Login = ({ open, handleClose, setOpen }) => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
+  const LoginData = JSON.parse(localStorage.getItem("userData"));
+
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
+
+
+  const validationSchema = Yup.object({
+    email: Yup.string().email('Invalid email address').required('Required'),
+    password: Yup.string().required('Required').min(6, 'Password must be at least 6 characters'),
+  });
+
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema,
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
+      try {
+        const response = await LoginApi(values); 
+        handleClose();
+        resetForm();
+      } catch (error) {
+        console.error('Login error:', error);
+      } finally {
+        setSubmitting(false);
+      }
+    },
+  });
+
+
+
+
 
   return (
     <div>
@@ -125,104 +164,102 @@ const Login = ({ open, handleClose, setOpen }) => {
                               Sign up
                             </Typography>
 
-                            <form>
+                            <Form onSubmit={formik.handleSubmit}>
                               <Box sx={{ marginBottom: "10px" }}>
-                                <Input
-                                  text="Add New"
-                                  variant="outlined"
-                                  color="primary"
-                                  label="Email"
-                                  name="email"
-                                  // value={values.email}
-                                  // onChange={handleInputChange}
-                                  maxLength={30}
-                                />
+                                <div>
+                                  <Field
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeHolder="Email"
+                                    className="email-input"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.email}
+                                    style={{
+                                      width: "100%",
+                                      height: "40px",
+                                      backgroundColor: "#e4e4e4",
+                                      borderRadius: "5px",
+                                      border: "1px solid #898686",
+                                    }
+                                    }
+                                  />
+                                      {formik.errors.email ? ( 
+                                    <ErrorMessage
+                                      name="email"
+                                      component="div"
+                                      style={{
+                                        marginTop: "5px",
+                                        color: "red",
+                                        fontSize: "15px"
+                                      }}
+                                    />
+                                  ) : (
+                                    <></>
+                                  )}
+                                </div>
                               </Box>
 
+                             
+
                               <Box sx={{ marginBottom: "10px" }}>
-                                <Input
-                                  text="Add New"
-                                  variant="outlined"
-                                  color="primary"
-                                  label="Name"
-                                  name="name"
-                                  // value={values.name}
-                                  // onChange={handleInputChange}
-                                  maxLength={20}
-                                />
+                                <div>
+                                  <Field
+                                    type={showPassword ? 'text' : 'password'}
+                                    id="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.password}
+                                    className="password-input"
+                                    style={{
+                                      width: "100%",
+                                      height: "40px",
+                                      backgroundColor: "#e4e4e4",
+                                      borderRadius: "5px",
+                                      border: "1px solid #898686",
+
+                                    }}
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={togglePasswordVisibility}
+                                    style={{
+                                      position: 'absolute',
+                                      right: '140px',
+                                      marginTop: "6px",
+                                      backgroundColor: 'transparent',
+                                      border: 'none',
+                                      cursor: 'pointer',
+                                    }}
+                                  >
+                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                  </button>
+                                  {formik.errors.password ? ( 
+                                    <ErrorMessage
+                                      name="password"
+                                      component="div"
+                                      style={{
+                                        marginTop: "5px",
+                                        color: "red",
+                                        fontSize: "15px"
+                                      }}
+                                    />
+                                  ) : (
+                                    <></>
+                                  )}
+                                </div>
                               </Box>
-
-                              <FormControl
-                                sx={{ marginTop: "10px", width: "100%" }}
-                                variant="outlined"
-                              >
-                                <InputLabel
-                                  htmlFor="outlined-adornment-password"
-                                  sx={{
-                                    color: "black",
-                                    bgcolor: "#e4e4e4",
-                                    lineHeight: "1",
-                                  }}
-                                >
-                                  Password
-                                </InputLabel>
-                                <OutlinedInput
-                                  sx={{
-                                    "& .MuiInputBase-input": {
-                                      padding: "12px 14px !important",
-                                    },
-
-                                    "& .MuiOutlinedInput-notchedOutline": {
-                                      paddingTop: "10px!important",
-                                      borderColor: "rgba(107, 114, 128, .5)",
-
-                                      borderRadius: "7px!important",
-                                    },
-                                    "&:hover .MuiOutlinedInput-notchedOutline":
-                                      {
-                                        borderColor: "black",
-                                      },
-                                    "&.Mui-focused .MuiOutlinedInput-notchedOutline":
-                                      {
-                                        borderColor: "blue",
-                                      },
-                                    paddingTop: "0px",
-                                    color: "#000",
-                                  }}
-                                  id="outlined-adornment-password"
-                                  name="password"
-                                  value={password}
-                                  onChange={(e) => setPassword(e.target.value)}
-                                  type={showPassword ? "text" : "password"}
-                                  endAdornment={
-                                    <InputAdornment position="end">
-                                      <IconButton
-                                        sx={{ color: "#000" }}
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                      >
-                                        {showPassword ? (
-                                          <VisibilityOff />
-                                        ) : (
-                                          <Visibility />
-                                        )}
-                                      </IconButton>
-                                    </InputAdornment>
-                                  }
-                                />
-                              </FormControl>
 
                               <Button
-                                sx={{ marginTop: "10px", width: "100%", backgroundColor:"rgb(255, 87, 34)" }}
+                                sx={{ marginTop: "10px", width: "100%", backgroundColor: "rgb(255, 87, 34)" }}
                                 variant="contained"
-                                // onClick={onClick}
+                                type="submit"
                                 size="medium"
                               >
                                 Signup
                               </Button>
-                            </form>
+                            </Form>
                           </Box>
                         </Grid>
                       </Grid>

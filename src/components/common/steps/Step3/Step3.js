@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import {
   Box,
-  Button,
   FormControl,
   Grid,
   MenuItem,
   Select,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
-import CustomizedSwitch from "../switch.component";
-import ColorTabs from "../tabs.component";
-import CustomCounter from "../counter.component";
+import CustomizedSwitch from "../../switch.component";
+import ColorTabs from "../../tabs.component";
+import CustomCounter from "../../counter.component";
+import WeddingDayForm from "./WeddingDayForm";
 
 const Step3 = () => {
   const [value, setValue] = useState(1);
+  const [tabValue, setTabValue] = useState(1);
   const [checked, setChecked] = useState(false);
 
   const handleChange = (event) => {
@@ -121,7 +121,18 @@ const Step3 = () => {
         rowSpacing={2}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
-        <Grid item>{value > 0 && <ColorTabs count={value} />}</Grid>
+        <Grid item >
+          {value > 0 && (
+            <ColorTabs
+              tabValue={tabValue}
+              setTabValue={setTabValue}
+              count={value}
+              title="Day"
+            >
+              <WeddingDayForm dayCount={tabValue} />
+            </ColorTabs>
+          )}
+        </Grid>
       </Grid>
     </Box>
   );

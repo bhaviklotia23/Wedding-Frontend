@@ -6,7 +6,7 @@ import StepLabel from "@mui/material/StepLabel";
 import { Button, Paper, Typography } from "@mui/material";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
-import Step3 from "./steps/Step3";
+import Step3 from "./steps/Step3/Step3";
 import styled from "@emotion/styled";
 import Step4 from "./steps/Step4";
 import Step5 from "./steps/Step5";
@@ -74,58 +74,69 @@ export default function StepperComponent() {
   }));
 
   return (
-    <DemoPaper elevation={3}>
-      <Box sx={{ width: "100%" }}>
-        <CustomStepper activeStep={activeStep} alternativeLabel>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </CustomStepper>
-        {activeStep > steps.length ? (
-          <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1 }}>
-              All steps completed - you&apos;re finished
-            </Typography>
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Box sx={{ flex: "1 1 auto" }} />
-            </Box>
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            <Box
-              component="form"
-              sx={{
-                marginTop: "30px",
-              }}
-              autoComplete="off"
-            >
-              {getStepContent(activeStep)}
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                pt: 2,
-              }}
-            >
-              <Button
-                color="inherit"
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                Back
-              </Button>
-              <Box sx={{ flex: "1 1 auto" }} />
-              <CustomButton color="warning" onClick={handleNext}>
-                {activeStep === steps.length - 1 ? "Finish" : "Next"}
-              </CustomButton>
-            </Box>
-          </React.Fragment>
-        )}
-      </Box>
-    </DemoPaper>
+    <>
+      <div
+        style={{
+          minHeight: "calc(100vh - 40vh)",
+          overflow: "hidden",
+          width: "100%",
+          marginTop: 50
+        }}
+      >
+        <DemoPaper elevation={3}>
+          <Box sx={{ width: "100%" }}>
+            <CustomStepper activeStep={activeStep} alternativeLabel>
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </CustomStepper>
+            {activeStep > steps.length ? (
+              <React.Fragment>
+                <Typography sx={{ mt: 2, mb: 1 }}>
+                  All steps completed - you&apos;re finished
+                </Typography>
+                <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                  <Box sx={{ flex: "1 1 auto" }} />
+                </Box>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <Box
+                  component="form"
+                  sx={{
+                    marginTop: "30px",
+                  }}
+                  autoComplete="off"
+                >
+                  {getStepContent(activeStep)}
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    pt: 2,
+                  }}
+                >
+                  <Button
+                    color="inherit"
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    sx={{ mr: 1 }}
+                  >
+                    Back
+                  </Button>
+                  <Box sx={{ flex: "1 1 auto" }} />
+                  <CustomButton color="warning" onClick={handleNext}>
+                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  </CustomButton>
+                </Box>
+              </React.Fragment>
+            )}
+          </Box>
+        </DemoPaper>
+      </div>
+    </>
   );
 }

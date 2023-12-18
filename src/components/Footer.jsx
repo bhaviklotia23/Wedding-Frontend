@@ -11,29 +11,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Footer = () => {
   return (
     <div
-    style={{
-      minHeight: "calc(100vh - 40vh)",
-      overflow: "hidden",
-      width: "100%",
-      marginTop: "275px",
-    }}
+      style={{
+        minHeight: "calc(100vh - 40vh)",
+        overflow: "hidden",
+        width: "100%",
+        marginTop: "275px",
+      }}
     >
       <div class="footer-bottom">
         <div class="container">
           <div class="w3agile_footer_grids">
-            <div class="col-md-3 w3agile_footer_grid">
-              <h3>About Us</h3>
-              <p>
-                Etiam ut maximus mauris, eu pretium neque. Donec nibh lectus,
-                blandit id metus non, bibendum dictum quam.
-                <span>
-                  Ut finibus metus eget mi lacinia, et vulputate metus
-                  consectetur. Sed sed sem in tortor faucibus pharetra non ac
-                  est.
-                </span>
-              </p>
-            </div>
-
             <div class="col-md-3 w3agile_footer_grid">
               <h3>Contact Info</h3>
               <ul>
@@ -135,7 +122,6 @@ const Footer = () => {
         </div>
       </div>
     </div>
-    
   );
 };
 

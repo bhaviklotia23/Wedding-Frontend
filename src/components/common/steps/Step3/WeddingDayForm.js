@@ -1,21 +1,16 @@
-import {
-  Box,
-  FormControl,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, Stack, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { useFormData } from "../../../context/FormDataContext";
-import DatePickerComponent from "../datetimepicker/calender.component";
-import TimePickerComponent from "../datetimepicker/clock.component";
-import CustomCounter from "../counter.component";
+import { useFormData } from "../../../../context/FormDataContext";
+import DatePickerComponent from "../../datetimepicker/calender.component";
+import TimePickerComponent from "../../datetimepicker/clock.component";
+import CustomCounter from "../../counter.component";
+import ColorTabs from "../../tabs.component";
+import EventForm from "./EventForm";
 
 const WeddingDayForm = ({ dayCount }) => {
   const { formData, dispatch } = useFormData();
   const [value, setValue] = useState(1);
+  const [tabValue, setTabValue] = useState(1);
 
   const handleIncrement = () => {
     if (value < 5) {
@@ -237,6 +232,24 @@ const WeddingDayForm = ({ dayCount }) => {
             />
           </Stack>
         </Stack>
+        <Grid
+          container
+          direction={{ xs: "column", md: "row" }}
+          sx={{ display: "flex", justifyContent: "center", marginTop: "3ch" }}
+          rowSpacing={2}
+          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        >
+          <Grid item>
+            <ColorTabs
+              tabValue={tabValue}
+              setTabValue={setTabValue}
+              count={value}
+              title="Event"
+            >
+              <EventForm count={tabValue} />
+            </ColorTabs>
+          </Grid>
+        </Grid>
       </Box>
     </>
   );

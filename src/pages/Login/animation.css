@@ -57,3 +57,7 @@ body {
     }
   }
   
+
+  .email-input:hover {
+    border-color: orange;
+  }
