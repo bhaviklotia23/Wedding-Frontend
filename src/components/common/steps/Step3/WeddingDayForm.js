@@ -8,7 +8,7 @@ import ColorTabs from "../../tabs.component";
 import EventForm from "./EventForm";
 
 const WeddingDayForm = ({ dayCount }) => {
-  const { formData, dispatch } = useFormData();
+  // const { formData, dispatch } = useFormData();
   const [value, setValue] = useState(1);
   const [tabValue, setTabValue] = useState(1);
 
@@ -119,9 +119,10 @@ const WeddingDayForm = ({ dayCount }) => {
             <TextField
               color="warning"
               label="Address 1"
-              value={formData.email}
-              onChange={(e) =>
-                dispatch({ type: "update", payload: { email: e.target.value } })
+              // value={formData.email}
+              onChange={
+                (e) => {}
+                // dispatch({ type: "update", payload: { email: e.target.value } })
               }
             />
           </Stack>
@@ -139,9 +140,10 @@ const WeddingDayForm = ({ dayCount }) => {
             <TextField
               color="warning"
               label="Address 2"
-              value={formData.email}
-              onChange={(e) =>
-                dispatch({ type: "update", payload: { email: e.target.value } })
+              // value={formData.email}
+              onChange={
+                (e) => {}
+                // dispatch({ type: "update", payload: { email: e.target.value } })
               }
             />
           </Stack>
@@ -159,9 +161,10 @@ const WeddingDayForm = ({ dayCount }) => {
             <TextField
               color="warning"
               label="Name of Venue"
-              value={formData.email}
-              onChange={(e) =>
-                dispatch({ type: "update", payload: { email: e.target.value } })
+              // value={formData.email}
+              onChange={
+                (e) => {}
+                // dispatch({ type: "update", payload: { email: e.target.value } })
               }
             />
           </Stack>
@@ -185,9 +188,10 @@ const WeddingDayForm = ({ dayCount }) => {
             <TextField
               color="warning"
               label="State"
-              value={formData.email}
-              onChange={(e) =>
-                dispatch({ type: "update", payload: { email: e.target.value } })
+              // value={formData.email}
+              onChange={
+                (e) => {}
+                // dispatch({ type: "update", payload: { email: e.target.value } })
               }
             />
           </Stack>
@@ -205,9 +209,10 @@ const WeddingDayForm = ({ dayCount }) => {
             <TextField
               color="warning"
               label="City"
-              value={formData.email}
-              onChange={(e) =>
-                dispatch({ type: "update", payload: { email: e.target.value } })
+              // value={formData.email}
+              onChange={
+                (e) => {}
+                // dispatch({ type: "update", payload: { email: e.target.value } })
               }
             />
           </Stack>
@@ -225,9 +230,10 @@ const WeddingDayForm = ({ dayCount }) => {
             <TextField
               color="warning"
               label="Zipcode"
-              value={formData.email}
-              onChange={(e) =>
-                dispatch({ type: "update", payload: { email: e.target.value } })
+              // value={formData.email}
+              onChange={
+                (e) => {}
+                // dispatch({ type: "update", payload: { email: e.target.value } })
               }
             />
           </Stack>

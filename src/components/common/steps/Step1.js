@@ -1,44 +1,14 @@
 import React from "react";
-import {
-  Box,
-  FormControl,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { useFormData } from "../../../context/FormDataContext";
+import { Box, Stack, Typography, TextField } from "@mui/material";
+// import { TextField } from "formik-material-ui";
+import { useFormikContext } from "formik";
 
 const Step1 = () => {
-  const { formData, dispatch } = useFormData();
+  const { values, errors, touched, handleChange, handleBlur } =
+    useFormikContext();
 
   return (
     <>
-      {/* <Box>
-        <Typography sx={{ margin: "0.5rem 0 0.5rem 0", fontWeight: "bold" }}>
-          Please select your Relationship
-        </Typography>
-        <Stack
-          direction={{ xs: "column", md: "row" }}
-          spacing={2}
-          sx={{ display: "flex", justifyContent: "center" }}
-        >
-          <FormControl>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value=""
-              label="Age"
-              onChange={()=>{}}
-            >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-        </Stack>
-      </Box> */}
       <Box sx={{ width: "100%" }}>
         <Typography
           sx={{
@@ -58,27 +28,36 @@ const Step1 = () => {
         >
           <TextField
             color="warning"
+            id="groomFirstName"
+            name="groomFirstName"
             label="First Name"
-            value={formData.name}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { name: e.target.value } })
-            }
+            value={values.groomFirstName}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.groomFirstName && Boolean(errors.groomFirstName)}
+            helperText={touched.groomFirstName && errors.groomFirstName}
           />
           <TextField
             color="warning"
+            id="groomLastName"
+            name="groomLastName"
             label="Last Name"
-            value={formData.email}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { email: e.target.value } })
-            }
+            value={values.groomLastName}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.groomLastName && Boolean(errors.groomLastName)}
+            helperText={touched.groomLastName && errors.groomLastName}
           />
           <TextField
             color="warning"
+            id="groomPhoneNumber"
+            name="groomPhoneNumber"
             label="Phone Number"
-            value={formData.email}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { email: e.target.value } })
-            }
+            value={values.groomPhoneNumber}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.groomPhoneNumber && Boolean(errors.groomPhoneNumber)}
+            helperText={touched.groomPhoneNumber && errors.groomPhoneNumber}
           />
         </Stack>
       </Box>
@@ -93,27 +72,34 @@ const Step1 = () => {
         >
           <TextField
             color="warning"
+            id="brideFirstName"
+            name="brideFirstName"
             label="First Name"
-            value={formData.name}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { name: e.target.value } })
-            }
+            value={values.brideFirstName}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.brideFirstName && Boolean(errors.brideFirstName)}
+            helperText={touched.brideFirstName && errors.brideFirstName}
           />
           <TextField
-            color="warning"
+            id="brideLastName"
+            name="brideLastName"
             label="Last Name"
-            value={formData.email}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { email: e.target.value } })
-            }
+            value={values.brideLastName}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.brideLastName && Boolean(errors.brideLastName)}
+            helperText={touched.brideLastName && errors.brideLastName}
           />
           <TextField
-            color="warning"
+            id="bridePhoneNumber"
+            name="bridePhoneNumber"
             label="Phone Number"
-            value={formData.email}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { email: e.target.value } })
-            }
+            value={values.bridePhoneNumber}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.bridePhoneNumber && Boolean(errors.bridePhoneNumber)}
+            helperText={touched.bridePhoneNumber && errors.bridePhoneNumber}
           />
         </Stack>
       </Box>

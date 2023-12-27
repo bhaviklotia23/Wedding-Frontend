@@ -1,10 +1,10 @@
 import React from "react";
-import { useFormik } from 'formik';
-import { Field, Form, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import { useFormik } from "formik";
+import { Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { Button } from "@mui/material";
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { addContacts } from "../../api/contact/contact";
 import { useNavigate } from "react-router-dom";
 
@@ -13,8 +13,8 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          '&:hover': {
-            backgroundColor: 'rgb(255, 87, 34) !important',
+          "&:hover": {
+            backgroundColor: "rgb(255, 87, 34) !important",
           },
         },
       },
@@ -22,37 +22,32 @@ const theme = createTheme({
   },
 });
 
-
-
-
 const Contact = () => {
-
-  const navigate = useNavigate("")
+  const navigate = useNavigate("");
 
   const validationSchema = Yup.object({
-    email: Yup.string().email('Invalid email address').required('Required'),
-    name: Yup.string().required('Required'),
-    description: Yup.string().required('Required')
+    email: Yup.string().email("Invalid email address").required("Required"),
+    name: Yup.string().required("Required"),
+    description: Yup.string().required("Required"),
   });
-
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      email: '',
-      description: ''
+      name: "",
+      email: "",
+      description: "",
     },
     validationSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       try {
         const response = await addContacts(values);
-        console.log("response",response)
-        if(response.success){
+        console.log("response", response);
+        if (response.success) {
           resetForm();
-          navigate("/")
+          navigate("/");
         }
       } catch (error) {
-        console.error('Login error:', error);
+        console.error("Login error:", error);
       } finally {
         setSubmitting(false);
       }
@@ -80,20 +75,17 @@ const Contact = () => {
                   className="name-input"
                   onChange={formik.handleChange}
                   value={formik.values.name}
-
                 />
-                {formik.errors.name ? (
+                {formik.errors.name && (
                   <ErrorMessage
                     name="name"
                     component="div"
                     style={{
                       marginTop: "5px",
                       color: "red",
-                      fontSize: "15px"
+                      fontSize: "15px",
                     }}
                   />
-                ) : (
-                  <></>
                 )}
                 <Field
                   type="email"
@@ -104,20 +96,18 @@ const Contact = () => {
                   onChange={formik.handleChange}
                   value={formik.values.email}
                   style={{ marginLeft: "12px" }}
-
                 />
-                {formik.errors.email ? (
+                {formik.errors.email && (
                   <ErrorMessage
                     name="email"
                     component="div"
                     style={{
                       marginTop: "5px",
                       color: "red",
-                      fontSize: "15px"
+                      fontSize: "15px",
                     }}
                   />
-                ) : (
-                  <></>
+                
                 )}
 
                 <Field
@@ -137,7 +127,7 @@ const Contact = () => {
                     style={{
                       marginTop: "5px",
                       color: "red",
-                      fontSize: "15px"
+                      fontSize: "15px",
                     }}
                   />
                 ) : (
@@ -147,8 +137,8 @@ const Contact = () => {
                 <ThemeProvider theme={theme}>
                   <Button
                     sx={{
-                      marginTop: '10px',
-                      backgroundColor: 'rgb(255, 87, 34)',
+                      marginTop: "10px",
+                      backgroundColor: "rgb(255, 87, 34)",
                     }}
                     variant="contained"
                     type="submit"

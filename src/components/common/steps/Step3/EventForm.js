@@ -1,10 +1,10 @@
 import { Box, FormControl, Stack, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { useFormData } from "../../../../context/FormDataContext";
+// import { useFormData } from "../../../../context/FormDataContext";
 import CustomizedSwitch from "../../switch.component";
 
 const EventForm = ({ count }) => {
-  const { formData, dispatch } = useFormData();
+  // const { formData, dispatch } = useFormData();
   const [checked, setChecked] = useState(false);
 
   const handleChange = (event) => {
@@ -41,9 +41,10 @@ const EventForm = ({ count }) => {
           <TextField
             color="warning"
             label="Event Name"
-            value={formData.email}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { email: e.target.value } })
+            // value={formData.email}
+            onChange={
+              (e) => {}
+              // dispatch({ type: "update", payload: { email: e.target.value } })
             }
           />
         </Stack>
@@ -61,9 +62,10 @@ const EventForm = ({ count }) => {
           <TextField
             color="warning"
             label="Dress code"
-            value={formData.email}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { email: e.target.value } })
+            // value={formData.email}
+            onChange={
+              (e) => {}
+              // dispatch({ type: "update", payload: { email: e.target.value } })
             }
           />
         </Stack>
@@ -108,9 +110,10 @@ const EventForm = ({ count }) => {
             color="warning"
             multiline
             rows={4}
-            value={formData.email}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { email: e.target.value } })
+            // value={formData.email}
+            onChange={
+              (e) => {}
+              // dispatch({ type: "update", payload: { email: e.target.value } })
             }
           />
         </Stack>

@@ -1,10 +1,11 @@
 import React from "react";
-import { Box, Stack, TextField, Typography } from "@mui/material";
-import { useFormData } from "../../../context/FormDataContext";
+import { Box, Stack, Typography, TextField } from "@mui/material";
+import { useFormikContext } from "formik";
+// import { TextField } from "formik-material-ui";
 
 const Step2 = () => {
-  const { formData, dispatch } = useFormData();
-
+  const { values, errors, touched, handleChange, handleBlur } =
+    useFormikContext();
   return (
     <>
       <Box sx={{ width: "100%" }}>
@@ -25,15 +26,18 @@ const Step2 = () => {
           sx={{ display: "flex", justifyContent: "center" }}
         >
           <TextField
-            sx={{ width: "250ch" }}
-            multiline
-            rows={4}
+            sx={{ width: "100%", maxWidth: { md: "250ch" } }}
             color="warning"
+            id="story"
+            name="story"
             label="Your Story"
-            value={formData.email}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { email: e.target.value } })
-            }
+            rows={4}
+            multiline
+            value={values.story}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.story && Boolean(errors.story)}
+            helperText={touched.story && errors.story}
           />
         </Stack>
       </Box>
@@ -47,13 +51,16 @@ const Step2 = () => {
           sx={{ display: "flex", justifyContent: "center" }}
         >
           <TextField
-            sx={{ width: "85ch" }}
+            sx={{ width: "100%", maxWidth: { md: "85ch" } }}
             color="warning"
-            placeholder="Paste your video URL here"
-            value={formData.name}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { name: e.target.value } })
-            }
+            id="url"
+            name="url"
+            label="Video URL"
+            value={values.url}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.url && Boolean(errors.url)}
+            helperText={touched.url && errors.url}
           />
         </Stack>
       </Box>

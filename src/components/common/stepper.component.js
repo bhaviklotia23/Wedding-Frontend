@@ -11,18 +11,57 @@ import styled from "@emotion/styled";
 import Step4 from "./steps/Step4";
 import Step5 from "./steps/Step5";
 import Step6 from "./steps/Step6";
+import { Form, Formik } from "formik";
+// import SwipeableViews from "react-swipeable-views";
 
-const steps = [
-  "1st Step",
-  "2nd Step",
-  "3rd Step",
-  "4th Step",
-  "5th Step",
-  "6th Step",
-];
+const step = [Step1, Step2, Step3, Step4, Step5, Step6];
 
 export default function StepperComponent() {
   const [activeStep, setActiveStep] = React.useState(0);
+
+  const CustomButton = styled(Button)(({ theme }) => ({
+    "& .MuiButtonBase-root": {
+      color: theme.status.warning,
+    },
+  }));
+
+  const isLastStep = () => {
+    return activeStep === step.length - 1;
+  };
+
+  const handlePrev = () => {
+    setActiveStep(Math.max(activeStep - 1, 0));
+  };
+
+  const handleNext = () => [
+    setActiveStep(Math.min(activeStep + 1, step.length - 1)),
+  ];
+
+  const onSubmit = (values, formikBag) => {
+    const { setSubmitting } = formikBag;
+
+    if (!isLastStep()) {
+      setSubmitting(false);
+      handleNext();
+      return;
+    }
+
+    console.log(values);
+
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 1000);
+  };
+
+  const initialValues = step.reduce(
+    (values, { initialValues }) => ({
+      ...values,
+      ...initialValues,
+    }),
+    {}
+  );
+  const ActiveStep = step[activeStep];
+  const validationSchema = ActiveStep.validationSchema;
 
   const CustomStepper = styled(Stepper)(({ theme }) => ({
     "& .MuiStepIcon-root.Mui-active": {
@@ -32,39 +71,6 @@ export default function StepperComponent() {
       color: theme.status.warning, // Change the color of the icon here
     },
   }));
-
-  const CustomButton = styled(Button)(({ theme }) => ({
-    "& .MuiButtonBase-root": {
-      color: theme.status.warning,
-    },
-  }));
-
-  const getStepContent = (step) => {
-    switch (step) {
-      case 0:
-        return <Step1 />;
-      case 1:
-        return <Step2 />;
-      case 2:
-        return <Step3 />;
-      case 3:
-        return <Step4 />;
-      case 4:
-        return <Step5 />;
-      case 5:
-        return <Step6 />;
-      default:
-        return "";
-    }
-  };
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
 
   const DemoPaper = styled(Paper)(({ theme }) => ({
     margin: 75,
@@ -80,61 +86,64 @@ export default function StepperComponent() {
           minHeight: "calc(100vh - 40vh)",
           overflow: "hidden",
           width: "100%",
-          marginTop: 50
+          marginTop: 50,
         }}
       >
         <DemoPaper elevation={3}>
-          <Box sx={{ width: "100%" }}>
-            <CustomStepper activeStep={activeStep} alternativeLabel>
-              {steps.map((label) => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </CustomStepper>
-            {activeStep > steps.length ? (
-              <React.Fragment>
-                <Typography sx={{ mt: 2, mb: 1 }}>
-                  All steps completed - you&apos;re finished
-                </Typography>
-                <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                  <Box sx={{ flex: "1 1 auto" }} />
+          <Formik
+            initialValues={initialValues}
+            onSubmit={onSubmit}
+            validationSchema={validationSchema}
+          >
+            {({ isSubmitting, touched, values }) => (
+              <Form>
+                <Box sx={{ width: "100%" }}>
+                  <CustomStepper activeStep={activeStep} alternativeLabel>
+                    {step.map((steps, index) => (
+                      <Step key={index}>
+                        <StepLabel>{step[index].label}</StepLabel>
+                      </Step>
+                    ))}
+                  </CustomStepper>
+                  <>
+                    <Box
+                      component="form"
+                      sx={{
+                        marginTop: "30px",
+                      }}
+                      autoComplete="off"
+                    >
+                      {/* <SwipeableViews index={activeStep}>
+                        {step.map((steps, index) => {
+                          const Component = step[index];
+                          return <Component key={index} />;
+                        })}
+                      </SwipeableViews> */}
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        pt: 2,
+                      }}
+                    >
+                      <Button
+                        disabled={activeStep === 0 || isSubmitting}
+                        onClick={handlePrev}
+                      >
+                        Previous
+                      </Button>
+                      <CustomButton disabled={isSubmitting} type="submit">
+                        {isLastStep() ? "Submit" : "Next"}
+                      </CustomButton>
+                    </Box>
+                  </>
                 </Box>
-              </React.Fragment>
-            ) : (
-              <React.Fragment>
-                <Box
-                  component="form"
-                  sx={{
-                    marginTop: "30px",
-                  }}
-                  autoComplete="off"
-                >
-                  {getStepContent(activeStep)}
-                </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    pt: 2,
-                  }}
-                >
-                  <Button
-                    color="inherit"
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    sx={{ mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                  <Box sx={{ flex: "1 1 auto" }} />
-                  <CustomButton color="warning" onClick={handleNext}>
-                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                  </CustomButton>
-                </Box>
-              </React.Fragment>
+                <pre>{JSON.stringify(values, null, 2)}</pre>
+                <pre>{JSON.stringify(touched, null, 2)}</pre>
+              </Form>
             )}
-          </Box>
+          </Formik>
         </DemoPaper>
       </div>
     </>

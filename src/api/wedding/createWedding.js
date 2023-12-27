@@ -1,7 +1,11 @@
-import axios from "axios";
-import { API_URL } from "../config/api";
+import { api } from "../config/api";
 
-export const createWedding = async () => {
-  const response = await axios.post(`${API_URL}`);
-  return response;
+export const createWedding = async (body) => {
+  try {
+    const response = await api.post("/addContact", body);
+    const responseData = response;
+    return responseData;
+  } catch (error) {
+    throw error;
+  }
 };

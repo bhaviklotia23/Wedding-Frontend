@@ -1,9 +1,9 @@
 import { Box, Stack, TextField, Typography } from "@mui/material";
 import React from "react";
-import { useFormData } from "../../../context/FormDataContext";
+// import { useFormData } from "../../../context/FormDataContext";
 
 const Step4 = () => {
-  const { formData, dispatch } = useFormData();
+  // const { formData, dispatch } = useFormData();
 
   return (
     <>
@@ -22,7 +22,7 @@ const Step4 = () => {
               id="demo-simple-select"
               value=""
               label="Age"
-              onChange={()=>{}}
+              onChange={()=>{} {}}
             >
               <MenuItem value={10}>Ten</MenuItem>
               <MenuItem value={20}>Twenty</MenuItem>
@@ -51,25 +51,28 @@ const Step4 = () => {
           <TextField
             color="warning"
             label="First Name"
-            value={formData.name}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { name: e.target.value } })
+            // value={formData.name}
+            onChange={
+              (e) => {}
+              // dispatch({ type: "update", payload: { name: e.target.value } })
             }
           />
           <TextField
             color="warning"
             label="Last Name"
-            value={formData.email}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { email: e.target.value } })
+            // value={formData.email}
+            onChange={
+              (e) => {}
+              // dispatch({ type: "update", payload: { email: e.target.value } })
             }
           />
           <TextField
             color="warning"
             label="Phone Number"
-            value={formData.email}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { email: e.target.value } })
+            // value={formData.email}
+            onChange={
+              (e) => {}
+              // dispatch({ type: "update", payload: { email: e.target.value } })
             }
           />
         </Stack>
@@ -86,17 +89,19 @@ const Step4 = () => {
           <TextField
             color="warning"
             label="Email"
-            value={formData.name}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { name: e.target.value } })
+            // value={formData.name}
+            onChange={
+              (e) => {}
+              // dispatch({ type: "update", payload: { name: e.target.value } })
             }
           />
           <TextField
             color="warning"
             label="Relationship to Couple"
-            value={formData.email}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { email: e.target.value } })
+            // value={formData.email}
+            onChange={
+              (e) => {}
+              // dispatch({ type: "update", payload: { email: e.target.value } })
             }
           />
         </Stack>
