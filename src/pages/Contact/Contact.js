@@ -1,8 +1,8 @@
 import React from "react";
-import { useFormik } from "formik";
-import { Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { Button } from "@mui/material";
+import { useFormik } from 'formik';
+import { Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { Button, styled } from "@mui/material";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { addContacts } from "../../api/contact/contact";
@@ -21,6 +21,21 @@ const theme = createTheme({
     },
   },
 });
+
+
+const StyledField = styled(Field)`
+  /* Default style */
+  margin-left: 0;
+
+  /* Media query for medium (md) devices */
+  @media (min-width: 768px) {
+    margin-left: 12px;
+  }
+
+`;
+
+
+
 
 const Contact = () => {
   const navigate = useNavigate("");
@@ -41,7 +56,7 @@ const Contact = () => {
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       try {
         const response = await addContacts(values);
-        console.log("response", response);
+        console.log("response", response)
         if (response.success) {
           resetForm();
           navigate("/");
@@ -87,7 +102,7 @@ const Contact = () => {
                     }}
                   />
                 )}
-                <Field
+                <StyledField
                   type="email"
                   id="email"
                   name="email"
@@ -95,7 +110,6 @@ const Contact = () => {
                   className="email-input"
                   onChange={formik.handleChange}
                   value={formik.values.email}
-                  style={{ marginLeft: "12px" }}
                 />
                 {formik.errors.email && (
                   <ErrorMessage

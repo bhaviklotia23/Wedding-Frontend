@@ -19,6 +19,15 @@ const step = [Step1, Step2, Step3, Step4, Step5, Step6];
 export default function StepperComponent() {
   const [activeStep, setActiveStep] = React.useState(0);
 
+  const CustomStepper = styled(Stepper)(({ theme }) => ({
+    "& .MuiStepIcon-root.Mui-active": {
+      color: theme.status.warning,
+    },
+    "& .MuiStepIcon-root.Mui-completed": {
+      color: theme.status.warning,
+    },
+  }));
+
   const CustomButton = styled(Button)(({ theme }) => ({
     "& .MuiButtonBase-root": {
       color: theme.status.warning,
@@ -63,20 +72,12 @@ export default function StepperComponent() {
   const ActiveStep = step[activeStep];
   const validationSchema = ActiveStep.validationSchema;
 
-  const CustomStepper = styled(Stepper)(({ theme }) => ({
-    "& .MuiStepIcon-root.Mui-active": {
-      color: theme.status.warning, // Change the color of the icon here
-    },
-    "& .MuiStepIcon-root.Mui-completed": {
-      color: theme.status.warning, // Change the color of the icon here
-    },
-  }));
-
   const DemoPaper = styled(Paper)(({ theme }) => ({
-    margin: 75,
+    // margin: "5% 10%", // Adjust margins for responsiveness
     padding: theme.spacing(2),
     ...theme.typography.body2,
     textAlign: "center",
+    margin: `${theme.breakpoints.down("xs") ? "5% 10%" : ""}${theme.breakpoints.between("sm", "md") ? "75px" : ""}`
   }));
 
   return (

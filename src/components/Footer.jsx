@@ -57,42 +57,42 @@ const Footer = () => {
                     icon={faAngleRight}
                     style={{ color: "white" }}
                   />{" "}
-                  <a href="about.html">About</a>
+                  <a href="/about">About</a>
                 </li>
                 <li>
                   <FontAwesomeIcon
                     icon={faAngleRight}
                     style={{ color: "white" }}
                   />{" "}
-                  <a href="gallery.html">Gallery</a>
+                  <a href="/gallery">Gallery</a>
                 </li>
                 <li>
                   <FontAwesomeIcon
                     icon={faAngleRight}
                     style={{ color: "white" }}
                   />{" "}
-                  <a href="blog.html">Blog</a>
+                  <a href="/blog">Blog</a>
                 </li>
-                <li>
+                {/* <li>
                   <FontAwesomeIcon
                     icon={faAngleRight}
                     style={{ color: "white" }}
                   />{" "}
                   <a href="icons.html">Icons</a>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <FontAwesomeIcon
                     icon={faAngleRight}
                     style={{ color: "white" }}
                   />{" "}
                   <a href="codes.html">Short Codes</a>
-                </li>
+                </li> */}
                 <li>
                   <FontAwesomeIcon
                     icon={faAngleRight}
                     style={{ color: "white" }}
                   />{" "}
-                  <a href="contact.html">Contact</a>
+                  <a href="/contact">Contact</a>
                 </li>
               </ul>
             </div>
