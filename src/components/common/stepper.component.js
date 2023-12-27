@@ -26,10 +26,10 @@ export default function StepperComponent() {
 
   const CustomStepper = styled(Stepper)(({ theme }) => ({
     "& .MuiStepIcon-root.Mui-active": {
-      color: theme.status.warning, // Change the color of the icon here
+      color: theme.status.warning,
     },
     "& .MuiStepIcon-root.Mui-completed": {
-      color: theme.status.warning, // Change the color of the icon here
+      color: theme.status.warning,
     },
   }));
 
@@ -67,22 +67,16 @@ export default function StepperComponent() {
   };
 
   const DemoPaper = styled(Paper)(({ theme }) => ({
-    margin: 75,
+    // margin: "5% 10%", // Adjust margins for responsiveness
     padding: theme.spacing(2),
     ...theme.typography.body2,
     textAlign: "center",
+    margin: `${theme.breakpoints.down("xs") ? "5% 10%" : ""}${theme.breakpoints.between("sm", "md") ? "75px" : ""}`
   }));
 
   return (
     <>
-      <div
-        style={{
-          minHeight: "calc(100vh - 40vh)",
-          overflow: "hidden",
-          width: "100%",
-          marginTop: 50
-        }}
-      >
+      <div style={{ minHeight: "100vh", marginTop: "85px" }}>
         <DemoPaper elevation={3}>
           <Box sx={{ width: "100%" }}>
             <CustomStepper activeStep={activeStep} alternativeLabel>
@@ -92,7 +86,7 @@ export default function StepperComponent() {
                 </Step>
               ))}
             </CustomStepper>
-            {activeStep > steps.length ? (
+            {activeStep >= steps.length ? (
               <React.Fragment>
                 <Typography sx={{ mt: 2, mb: 1 }}>
                   All steps completed - you&apos;re finished
@@ -103,22 +97,10 @@ export default function StepperComponent() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                <Box
-                  component="form"
-                  sx={{
-                    marginTop: "30px",
-                  }}
-                  autoComplete="off"
-                >
+                <Box component="form" autoComplete="off">
                   {getStepContent(activeStep)}
                 </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    pt: 2,
-                  }}
-                >
+                <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                   <Button
                     color="inherit"
                     disabled={activeStep === 0}

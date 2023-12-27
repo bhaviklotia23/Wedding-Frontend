@@ -1,18 +1,74 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import CustomDialog from "../common/dialog.component";
 import StepperComponent from "../common/stepper.component";
 import Login from "../../pages/Login/Login";
 import { LogOutApi, LoginApi } from "../../api/auth/login";
+import { Box, List, ListItem, ListItemButton, ListItemText, SwipeableDrawer } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import DropdownMenuItem from "../common/DropdownMenuItem";
+
+
+
+const pages = [
+  {
+    title: "Home",
+    path: "/",
+  },
+  {
+    title: "About",
+    path: "/about",
+  },
+  {
+    title: "Gallery",
+    path: "/gallery",
+  },
+
+  {
+    title: "Blog",
+    path: "/blog",
+  },
+  {
+    title: "Contact",
+    path: "/contact",
+  },
+  {
+    title: "Host wedding",
+    path: "/host_wedding",
+  },
+
+
+
+];
 
 const Section2 = () => {
   const location = useLocation();
   const link = location.pathname;
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const [activeLink, setActiveLink] = useState(link || "/");
   const [open, setOpen] = useState(false);
 
+  const [anchorElNav, setAnchorElNav] = useState(false);
+
+
   const [openModal, setOpenModal] = useState(false);
+
+
+  const handleOpenNavMenu = () => {
+    setAnchorElNav(true);
+  };
+
+  const handleNavigate = (path) => {
+    handleCloseNavMenu();
+    navigate(path);
+    setAnchorElNav(null);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -45,12 +101,12 @@ const Section2 = () => {
   const LogOut = async () => {
     try {
       await LogOutApi();
-  
+
       localStorage.removeItem('userData');
     } catch (error) {
     }
   };
- 
+
 
   return (
     <>
@@ -78,51 +134,151 @@ const Section2 = () => {
             </div> */}
             </div>
 
+
+            <div className="header-mobile d-flex d-xl-none flex-fill justify-content-between align-items-center" style={{ marginTop: "-30px" }}>
+              <Box>
+                <MenuIcon
+                  onClick={handleOpenNavMenu}
+                  sx={{ display: { md: "none", xs: "block" }, color: "rgb(255, 87, 34)" }}
+                />
+              </Box>
+
+
+              <Box
+                sx={{
+                  flexGrow: { xs: 1, md: 0 },
+                }}
+              >
+                <SwipeableDrawer
+                  sx={{ display: { xs: "flex", md: "none", xl:"flex" }}}
+                  anchor="top"
+                  open={anchorElNav}
+                  onClose={handleCloseNavMenu}
+                  onOpen={handleCloseNavMenu}
+                >
+                  <Box
+                    role="presentation"
+                    // onClick={handleCloseNavMenu}
+                    onKeyDown={handleCloseNavMenu}
+                    sx={{
+                      width: "fit-content",
+                      marginTop: 2,
+                      minWidth: "11rem",
+                    }}
+                  >
+                    <List>
+                      {pages?.map((page, index) => (
+                        <ListItem
+                          key={index}
+                          disablePadding
+                          sx={{
+                            fontSize: 15,
+                            fontWeight: "bold",
+                            marginLeft: "12px",
+                          }}
+                        >
+                          {Array.isArray(page.children) ? (
+                            <DropdownMenuItem
+                              handleCloseNavMenu={handleCloseNavMenu}
+                              title={page.title}
+                              items={page.children}
+                            />
+                          ) : (
+                            <ListItemButton
+                              onClick={() => handleNavigate(page.path)}
+                            >
+                              <ListItemText primary={page.title} />
+                            </ListItemButton>
+                          )}
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Box>
+                </SwipeableDrawer>
+              </Box>
+              {!LoginData?.token ? (
+                <ul class="nav navbar-nav link-effect-4" 
+                style={{
+                  display: "flex",
+                  marginTop: "-3px",
+                }}>
+                  <li class="first-list" style={{ backgroundColor: "white" }}>
+                    <button
+                      onClick={handleOpenModal}
+                      style={{ backgroundColor: "white", color: "#ff5722" }}
+                    >
+                      Login
+                    </button>
+                  </li>
+                </ul>
+              ) :
+                <>
+                  <ul class="nav navbar-nav link-effect-4">
+                    <li class="first-list" style={{ backgroundColor: "white" }}>
+                      <button
+                        onClick={LogOut}
+                        style={{ backgroundColor: "white", color: "#ff5722" }}
+                      >
+                        LogOut
+                      </button>
+                    </li>
+                  </ul>
+                </>
+              }
+            </div>
+
             <div
               class="collapse navbar-collapse"
               id="bs-example-navbar-collapse-1"
             >
+
+
+
+
+
+
+
               {!LoginData?.token ? (
                 <ul class="nav navbar-nav link-effect-4">
-                <li class="first-list" style={{ backgroundColor: "white" }}>
-                  <button
-                    onClick={handleOpenModal}
-                    style={{ backgroundColor: "white", color: "#ff5722" }}
-                  >
-                    Login
-                  </button>
-                </li>
-              </ul>
-              ):
-              <>
-              <ul class="nav navbar-nav link-effect-4">
-                <li class="first-list" style={{ backgroundColor: "white" }}>
-                  <button
-                  onClick={LogOut}
-                    style={{ backgroundColor: "white", color: "#ff5722" }}
-                  >
-                    LogOut
-                  </button>
-                </li>
-              </ul>
-              </>
+                  <li class="first-list" style={{ backgroundColor: "white" }}>
+                    <button
+                      onClick={handleOpenModal}
+                      style={{ backgroundColor: "white", color: "#ff5722" }}
+                    >
+                      Login
+                    </button>
+                  </li>
+                </ul>
+              ) :
+                <>
+                  <ul class="nav navbar-nav link-effect-4">
+                    <li class="first-list" style={{ backgroundColor: "white" }}>
+                      <button
+                        onClick={LogOut}
+                        style={{ backgroundColor: "white", color: "#ff5722" }}
+                      >
+                        LogOut
+                      </button>
+                    </li>
+                  </ul>
+                </>
               }
-              
-              {!LoginData?.token 
-              ? (
-                <ul class="nav navbar-nav link-effect-4">
-                <li class="first-list" style={{ backgroundColor: "white" }}>
-                  <button
-                    onClick={handleOpenModal}
-                    style={{ backgroundColor: "white", color: "#ff5722" }}
-                  >
-                    Register
-                  </button>
-                </li>
-              </ul>
-              ) :null
-            }
-             
+
+              {!LoginData?.token
+                ? (
+                  <ul class="nav navbar-nav link-effect-4">
+                    <li class="first-list" style={{ backgroundColor: "white" }}>
+                      <button
+                        onClick={handleOpenModal}
+                        style={{ backgroundColor: "white", color: "#ff5722" }}
+                      >
+                        Register
+                      </button>
+                    </li>
+                  </ul>
+                ) : null
+              }
+
 
               {/* <ul class="nav navbar-nav link-effect-4">
                 <li class={`first-list`}>

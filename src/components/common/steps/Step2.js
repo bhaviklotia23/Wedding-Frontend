@@ -25,7 +25,11 @@ const Step2 = () => {
           sx={{ display: "flex", justifyContent: "center" }}
         >
           <TextField
-            sx={{ width: "250ch" }}
+          sx={{
+              width: "100%",
+              maxWidth: { md: "250ch" },
+            }}
+            // sx={{ width: "250ch" }}
             multiline
             rows={4}
             color="warning"
@@ -47,7 +51,11 @@ const Step2 = () => {
           sx={{ display: "flex", justifyContent: "center" }}
         >
           <TextField
-            sx={{ width: "85ch" }}
+            sx={{
+              width: "100%",
+              maxWidth: { md: "85ch" },
+            }}
+            // sx={{width:"100%"}}
             color="warning"
             placeholder="Paste your video URL here"
             value={formData.name}

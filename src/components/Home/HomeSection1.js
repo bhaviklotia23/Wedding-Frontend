@@ -17,7 +17,7 @@ const HomeSection1 = () => {
       <Section3 />
       <div class="welcome">
         <div class="container">
-          <div class="w3-heading-grid">
+          <div class="w3-heading-grid" style={{marginTop:"160px"}}>
             <h3 style={{ fontSize: "30px" }}>
               Welcome to the mesmerizing realm of <br />
               "Journey to Indian Wedding Wonders"!{" "}

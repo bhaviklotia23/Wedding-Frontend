@@ -2,17 +2,22 @@ import { Box, FormControl, Stack, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useFormData } from "../../../../context/FormDataContext";
 import CustomizedSwitch from "../../switch.component";
+import { useTheme } from "@mui/material/styles";
 
 const EventForm = ({ count }) => {
   const { formData, dispatch } = useFormData();
   const [checked, setChecked] = useState(false);
+  const theme = useTheme();
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        marginLeft: { xs: "-30px", md: "none" },
+      }}>
       <Typography
         sx={{
           margin: "0.5rem 0 1rem 0",
@@ -27,7 +32,12 @@ const EventForm = ({ count }) => {
         spacing={2}
         sx={{ display: "flex", justifyContent: "center" }}
       >
-        <Stack>
+        <Stack
+          sx={{
+            display: "flex",
+            alignItems: "flex-start"
+          }}
+        >
           <Typography
             sx={{
               display: "flex",
@@ -47,7 +57,12 @@ const EventForm = ({ count }) => {
             }
           />
         </Stack>
-        <Stack>
+        <Stack
+          sx={{
+            display: "flex",
+            alignItems: "flex-start"
+          }}
+        >
           <Typography
             sx={{
               display: "flex",
@@ -67,7 +82,12 @@ const EventForm = ({ count }) => {
             }
           />
         </Stack>
-        <Stack>
+        <Stack
+          sx={{
+            display: "flex",
+            alignItems: "flex-start"
+          }}
+        >
           <Typography
             sx={{
               display: "flex",
@@ -88,33 +108,44 @@ const EventForm = ({ count }) => {
         </Stack>
       </Stack>
       <Stack
-        direction={{ xs: "column", md: "row" }}
-        spacing={2}
-        sx={{ display: "flex", justifyContent: "center" }}
+      direction={{ xs: "column", md: "row" }}
+      spacing={2}
+      sx={{ display: "flex", justifyContent: "center" }}
+    >
+      <Stack
+        sx={{
+          display: "flex",
+          alignItems: "flex-start"
+        }}
       >
-        <Stack>
-          <Typography
-            sx={{
-              display: "flex",
-              justifyContent: "flex-start",
-              margin: "1.5rem 0 1rem 0",
-              fontWeight: "bold",
-            }}
-          >
-            Description of Event
-          </Typography>
-          <TextField
-            sx={{ width: "100ch" }}
-            color="warning"
-            multiline
-            rows={4}
-            value={formData.email}
-            onChange={(e) =>
-              dispatch({ type: "update", payload: { email: e.target.value } })
-            }
-          />
-        </Stack>
+        <Typography
+          sx={{
+            display: "flex",
+            justifyContent: "flex-start",
+            margin: "1.5rem 0 1rem 0",
+            fontWeight: "bold",
+          }}
+        >
+          Description of Event
+        </Typography>
+        <TextField
+          sx={{
+            width: "100%",
+            maxWidth: "100%", 
+            [theme.breakpoints.up("md")]: {
+              maxWidth: "100ch", 
+            },
+          }}
+          color="warning"
+          multiline
+          rows={4}
+          value={formData.email}
+          onChange={(e) =>
+            dispatch({ type: "update", payload: { email: e.target.value } })
+          }
+        />
       </Stack>
+    </Stack>
     </Box>
   );
 };

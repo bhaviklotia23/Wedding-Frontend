@@ -50,7 +50,10 @@ const WeddingDayForm = ({ dayCount }) => {
           </FormControl>
         </Stack>
       </Box> */}
-      <Box>
+      <Box
+        sx={{
+          display: { xs: "flex", md: "none" },
+        }}>
         <Stack
           direction={{ xs: "column", md: "row" }}
           spacing={2}
@@ -90,7 +93,10 @@ const WeddingDayForm = ({ dayCount }) => {
             margin: "2rem 0 1rem 0",
             fontWeight: "bold",
             fontSize: "1.5rem",
+            display: { xs: "flex", md: "none" },
+
           }}
+
         >
           Event Information
         </Typography>
@@ -105,7 +111,11 @@ const WeddingDayForm = ({ dayCount }) => {
             value={value}
             title={`Events (Day ${dayCount})`}
           />
-          <Stack>
+          <Stack 
+          sx={{
+            display: "flex",
+            alignItems: "flex-start"
+          }}>
             <Typography
               sx={{
                 display: "flex",
@@ -125,7 +135,12 @@ const WeddingDayForm = ({ dayCount }) => {
               }
             />
           </Stack>
-          <Stack>
+          <Stack
+            sx={{
+            display: "flex",
+            alignItems: "flex-start"
+          }}
+          >
             <Typography
               sx={{
                 display: "flex",
@@ -145,7 +160,12 @@ const WeddingDayForm = ({ dayCount }) => {
               }
             />
           </Stack>
-          <Stack>
+          <Stack
+            sx={{
+            display: "flex",
+            alignItems: "flex-start"
+          }}
+          >
             <Typography
               sx={{
                 display: "flex",
@@ -171,7 +191,12 @@ const WeddingDayForm = ({ dayCount }) => {
           spacing={2}
           sx={{ display: "flex", justifyContent: "center" }}
         >
-          <Stack>
+          <Stack
+          sx={{
+            display: "flex",
+            alignItems: "flex-start"
+          }}
+          >
             <Typography
               sx={{
                 display: "flex",
@@ -191,7 +216,12 @@ const WeddingDayForm = ({ dayCount }) => {
               }
             />
           </Stack>
-          <Stack>
+          <Stack
+          sx={{
+            display: "flex",
+            alignItems: "flex-start"
+          }}
+          >
             <Typography
               sx={{
                 display: "flex",
@@ -211,7 +241,12 @@ const WeddingDayForm = ({ dayCount }) => {
               }
             />
           </Stack>
-          <Stack>
+          <Stack
+          sx={{
+            display: "flex",
+            alignItems: "flex-start"
+          }}
+          >
             <Typography
               sx={{
                 display: "flex",

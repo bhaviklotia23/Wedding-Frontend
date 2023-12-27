@@ -17,7 +17,7 @@ const AboutSection2 = () => {
               <div className="agileits-border"> </div>
             </div>
             <div className="agile-choose-grids">
-              <div className="col-sm-4 agile-choose-grid">
+              <div className="col-md-4 agile-choose-grid">
                 <div className="choose-icon">
                   <i className="fa fa-user" aria-hidden="true" />
                 </div>
@@ -31,7 +31,7 @@ const AboutSection2 = () => {
                   </p>
                 </div>
               </div>
-              <div className="col-sm-4 agile-choose-grid">
+              <div className="col-md-4  agile-choose-grid">
                 <div className="choose-icon">
                   <i className="fa fa-cogs" aria-hidden="true" />
                 </div>
@@ -45,7 +45,7 @@ const AboutSection2 = () => {
                   </p>
                 </div>
               </div>
-              <div className="col-sm-4 agile-choose-grid">
+              <div className="col-md-4  agile-choose-grid">
                 <div className="choose-icon">
                   <i className="fa fa-thumbs-o-up" aria-hidden="true" />
                 </div>
