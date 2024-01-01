@@ -6,11 +6,16 @@ import TimePickerComponent from "../../datetimepicker/clock.component";
 import CustomCounter from "../../counter.component";
 import ColorTabs from "../../tabs.component";
 import EventForm from "./EventForm";
+import { useFormikContext } from "formik";
 
 const WeddingDayForm = ({ dayCount }) => {
   // const { formData, dispatch } = useFormData();
   const [value, setValue] = useState(1);
   const [tabValue, setTabValue] = useState(1);
+  const { values, errors, touched, handleChange, handleBlur } =
+    useFormikContext();
+
+    console.log("errors",errors)
 
   const handleIncrement = () => {
     if (value < 5) {
@@ -111,11 +116,11 @@ const WeddingDayForm = ({ dayCount }) => {
             value={value}
             title={`Events (Day ${dayCount})`}
           />
-          <Stack 
-          sx={{
-            display: "flex",
-            alignItems: "flex-start"
-          }}>
+          <Stack
+            sx={{
+              display: "flex",
+              alignItems: "flex-start"
+            }}>
             <Typography
               sx={{
                 display: "flex",
@@ -129,18 +134,21 @@ const WeddingDayForm = ({ dayCount }) => {
             <TextField
               color="warning"
               label="Address 1"
-              // value={formData.email}
-              onChange={
-                (e) => {}
-                // dispatch({ type: "update", payload: { email: e.target.value } })
-              }
+              id="address1"
+              name="address1"
+              value={values.address1}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.address1 && Boolean(errors.address1)}
+              helperText={touched.address1 && errors.address1}
+
             />
           </Stack>
           <Stack
             sx={{
-            display: "flex",
-            alignItems: "flex-start"
-          }}
+              display: "flex",
+              alignItems: "flex-start"
+            }}
           >
             <Typography
               sx={{
@@ -155,18 +163,20 @@ const WeddingDayForm = ({ dayCount }) => {
             <TextField
               color="warning"
               label="Address 2"
-              // value={formData.email}
-              onChange={
-                (e) => {}
-                // dispatch({ type: "update", payload: { email: e.target.value } })
-              }
+              id="address2"
+              name="address2"
+              value={values.address2}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.address2 && Boolean(errors.address2)}
+              helperText={touched.address2 && errors.address2}
             />
           </Stack>
           <Stack
             sx={{
-            display: "flex",
-            alignItems: "flex-start"
-          }}
+              display: "flex",
+              alignItems: "flex-start"
+            }}
           >
             <Typography
               sx={{
@@ -181,11 +191,13 @@ const WeddingDayForm = ({ dayCount }) => {
             <TextField
               color="warning"
               label="Name of Venue"
-              // value={formData.email}
-              onChange={
-                (e) => {}
-                // dispatch({ type: "update", payload: { email: e.target.value } })
-              }
+              id="venue"
+              name="venue"
+              value={values.venue}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.venue && Boolean(errors.venue)}
+              helperText={touched.venue && errors.venue}
             />
           </Stack>
         </Stack>
@@ -195,10 +207,10 @@ const WeddingDayForm = ({ dayCount }) => {
           sx={{ display: "flex", justifyContent: "center" }}
         >
           <Stack
-          sx={{
-            display: "flex",
-            alignItems: "flex-start"
-          }}
+            sx={{
+              display: "flex",
+              alignItems: "flex-start"
+            }}
           >
             <Typography
               sx={{
@@ -213,18 +225,20 @@ const WeddingDayForm = ({ dayCount }) => {
             <TextField
               color="warning"
               label="State"
-              // value={formData.email}
-              onChange={
-                (e) => {}
-                // dispatch({ type: "update", payload: { email: e.target.value } })
-              }
+              id="state"
+              name="state"
+              value={values.state}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.state && Boolean(errors.state)}
+              helperText={touched.state && errors.state}
             />
           </Stack>
           <Stack
-          sx={{
-            display: "flex",
-            alignItems: "flex-start"
-          }}
+            sx={{
+              display: "flex",
+              alignItems: "flex-start"
+            }}
           >
             <Typography
               sx={{
@@ -239,18 +253,20 @@ const WeddingDayForm = ({ dayCount }) => {
             <TextField
               color="warning"
               label="City"
-              // value={formData.email}
-              onChange={
-                (e) => {}
-                // dispatch({ type: "update", payload: { email: e.target.value } })
-              }
+              id="city"
+              name="city"
+              value={values.city}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.city && Boolean(errors.city)}
+              helperText={touched.city && errors.city}
             />
           </Stack>
           <Stack
-          sx={{
-            display: "flex",
-            alignItems: "flex-start"
-          }}
+            sx={{
+              display: "flex",
+              alignItems: "flex-start"
+            }}
           >
             <Typography
               sx={{
@@ -263,13 +279,15 @@ const WeddingDayForm = ({ dayCount }) => {
               Zipcode
             </Typography>
             <TextField
+             id="zipCode"
+              name="zipCode"
               color="warning"
               label="Zipcode"
-              // value={formData.email}
-              onChange={
-                (e) => {}
-                // dispatch({ type: "update", payload: { email: e.target.value } })
-              }
+              value={values.zipCode}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.zipCode && Boolean(errors.zipCode)}
+              helperText={touched.zipCode && errors.zipCode}
             />
           </Stack>
         </Stack>

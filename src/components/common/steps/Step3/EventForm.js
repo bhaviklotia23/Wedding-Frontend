@@ -3,13 +3,23 @@ import React, { useState } from "react";
 // import { useFormData } from "../../../../context/FormDataContext";
 import CustomizedSwitch from "../../switch.component";
 import { useTheme } from "@mui/material/styles";
+import { useFormikContext } from "formik";
 
 const EventForm = ({ count }) => {
   // const { formData, dispatch } = useFormData();
   const [checked, setChecked] = useState(false);
   const theme = useTheme();
+  const { values, errors, touched, handleChange, handleBlur } =
+    useFormikContext();
 
-  const handleChange = (event) => {
+
+  const handleSwitchChange = (event) => {
+    const { checked } = event.target;
+    handleChange({ target: { name: "music", value: checked } });
+  };
+
+
+  const handleChanges = (event) => {
     setChecked(event.target.checked);
   };
 
@@ -51,11 +61,13 @@ const EventForm = ({ count }) => {
           <TextField
             color="warning"
             label="Event Name"
-            // value={formData.email}
-            onChange={
-              (e) => {}
-              // dispatch({ type: "update", payload: { email: e.target.value } })
-            }
+            id="event"
+            name="event"
+            value={values.event}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.event && Boolean(errors.event)}
+            helperText={touched.event && errors.event}
           />
         </Stack>
         <Stack
@@ -77,11 +89,13 @@ const EventForm = ({ count }) => {
           <TextField
             color="warning"
             label="Dress code"
-            // value={formData.email}
-            onChange={
-              (e) => {}
-              // dispatch({ type: "update", payload: { email: e.target.value } })
-            }
+            id="dressCode"
+            name="dressCode"
+            value={values.dressCode}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.dressCode && Boolean(errors.dressCode)}
+            helperText={touched.dressCode && errors.dressCode}
           />
         </Stack>
         <Stack
@@ -102,52 +116,55 @@ const EventForm = ({ count }) => {
           </Typography>
           <FormControl>
             <CustomizedSwitch
-              label={checked ? "Yes" : "No"}
-              checked={checked}
-              handleChange={handleChange}
+              label={values.music ? "Yes" : "No"}
+              checked={values.music}
+              handleChange={handleSwitchChange}
             />
           </FormControl>
         </Stack>
       </Stack>
       <Stack
-      direction={{ xs: "column", md: "row" }}
-      spacing={2}
-      sx={{ display: "flex", justifyContent: "center" }}
-    >
-      <Stack
-        sx={{
-          display: "flex",
-          alignItems: "flex-start"
-        }}
+        direction={{ xs: "column", md: "row" }}
+        spacing={2}
+        sx={{ display: "flex", justifyContent: "center" }}
       >
-        <Typography
+        <Stack
           sx={{
             display: "flex",
-            justifyContent: "flex-start",
-            margin: "1.5rem 0 1rem 0",
-            fontWeight: "bold",
+            alignItems: "flex-start"
           }}
         >
-          Description of Event
-        </Typography>
-        <TextField
-          sx={{
-            width: "100%",
-            maxWidth: "100%", 
-            [theme.breakpoints.up("md")]: {
-              maxWidth: "100ch", 
-            },
-          }}
-          color="warning"
-          multiline
-          rows={4}
-          // value={formData.email}
-          onChange={(e) => {}
-            // dispatch({ type: "update", payload: { email: e.target.value } })
-          }
-        />
+          <Typography
+            sx={{
+              display: "flex",
+              justifyContent: "flex-start",
+              margin: "1.5rem 0 1rem 0",
+              fontWeight: "bold",
+            }}
+          >
+            Description of Event
+          </Typography>
+          <TextField
+            sx={{
+              width: "100%",
+              maxWidth: "100%",
+              [theme.breakpoints.up("md")]: {
+                maxWidth: "100ch",
+              },
+            }}
+            color="warning"
+            multiline
+            rows={4}
+            id="descriptionCode"
+            name="descriptionCode"
+            value={values.descriptionCode}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.descriptionCode && Boolean(errors.descriptionCode)}
+            helperText={touched.descriptionCode && errors.descriptionCode}
+          />
+        </Stack>
       </Stack>
-    </Stack>
     </Box>
   );
 };

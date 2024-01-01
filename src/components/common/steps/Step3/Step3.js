@@ -12,26 +12,51 @@ import CustomizedSwitch from "../../switch.component";
 import ColorTabs from "../../tabs.component";
 import CustomCounter from "../../counter.component";
 import WeddingDayForm from "./WeddingDayForm";
+import { useFormikContext } from "formik";
 
 const Step3 = () => {
   const [value, setValue] = useState(1);
   const [tabValue, setTabValue] = useState(1);
-  const [checked, setChecked] = useState(false);
+ 
 
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
+  const { values, errors, touched, handleChange, handleBlur } =
+    useFormikContext();
+
+
+  const handleSwitchChange = (event) => {
+    const { checked } = event.target;
+    handleChange({ target: { name: "alcohol", value: checked } });
   };
+
+  const handleSelectChange = (event) => {
+    const { value } = event.target;
+    handleChange("foodOffered")(event); 
+  };
+
+  // const handleIncrement = () => {
+  //   if (value < 5) {
+  //     setValue(value + 1);
+  //   }
+  // };
+
+  // const handleDecrement = () => {
+  //   if (value > 1) {
+  //     setValue(value - 1);
+  //   }
+  // };
 
   const handleIncrement = () => {
-    if (value < 5) {
-      setValue(value + 1);
+    if (values.weddingDay < 5) {
+      const newValue = values.weddingDay + 1;
+      handleChange({ target: { name: "weddingDay", value: newValue } });
     }
   };
+  
 
   const handleDecrement = () => {
-    if (value > 1) {
-      setValue(value - 1);
-    }
+    const newValue = values.weddingDay > 1 ? values.weddingDay - 1 : values.weddingDay;
+    console.log("newValue", newValue);
+    handleChange({ target: { name: "weddingDay", value: newValue } });
   };
 
   return (
@@ -64,7 +89,7 @@ const Step3 = () => {
             <CustomCounter
               handleDecrement={handleDecrement}
               handleIncrement={handleIncrement}
-              value={value}
+              value={values.weddingDay}
               title="Wedding Days"
             />
             <Stack>
@@ -80,13 +105,16 @@ const Step3 = () => {
               </Typography>
               <FormControl sx={{ marginRight: "3rem" }}>
                 <Select
+                  id="foodOffered"
                   sx={{ width: "20ch" }}
                   color="warning"
-                  id="demo-simple-select"
-                  value="Non-Vegetarian"
-                  onChange={() => {}}
+                  value={values.foodOffered}
+                  onChange={handleSelectChange}
+                  onBlur={handleBlur}
+                  name="foodOffered"
+
                 >
-                  <MenuItem value="Non-Vegetarian">Vegetarian</MenuItem>
+                  <MenuItem value="Vegetarian">Vegetarian</MenuItem>
                   <MenuItem value="Non-Vegetarian">Non-Vegetarian</MenuItem>
                   <MenuItem value="Both">Both</MenuItem>
                 </Select>
@@ -105,9 +133,9 @@ const Step3 = () => {
               </Typography>
               <FormControl>
                 <CustomizedSwitch
-                  label={checked ? "Yes" : "No"}
-                  checked={checked}
-                  handleChange={handleChange}
+                  label={values.alcohol ? "Yes" : "No"}
+                  checked={values.alcohol}
+                  handleChange={handleSwitchChange}
                 />
               </FormControl>
             </Stack>
@@ -122,11 +150,11 @@ const Step3 = () => {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
         <Grid item >
-          {value > 0 && (
+          {values.weddingDay > 0 && (
             <ColorTabs
               tabValue={tabValue}
               setTabValue={setTabValue}
-              count={value}
+              count={values.weddingDay}
               title="Day"
             >
               <WeddingDayForm dayCount={tabValue} />

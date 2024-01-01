@@ -3,10 +3,12 @@ import { Formik, Form } from "formik";
 import { Stepper, Step, StepLabel, Button, Box, Paper } from "@mui/material";
 import Step1 from "./steps/Step1"; // Step1 component
 import Step2 from "./steps/Step2"; // Step2 component
+import Step3 from "./steps/Step3/Step3"
 import styled from "@emotion/styled";
 import * as Yup from "yup";
 
 const steps = ["Step 1", "Step 2", "Step 3"];
+console.log("steps",steps)
 
 const validationSchema = [
   Yup.object({
@@ -20,6 +22,21 @@ const validationSchema = [
   Yup.object({
     story: Yup.string().required("Story is required"),
   }),
+  Yup.object({
+    foodOffered: Yup.string().required("foodOffered is required"),
+    alcohol: Yup.string().required("alcohol is required"),
+    address1: Yup.string().required("address1 is required"),
+    address2: Yup.string().required("address2 is required"),
+    venue: Yup.string().required("venue is required"),
+    state: Yup.string().required("state is required"),
+    city: Yup.string().required("city is required"),
+    zipCode: Yup.string().required("zipCode is required"),
+    event: Yup.string().required("event is required"),
+    dressCode: Yup.string().required("dressCode is required"),
+    music: Yup.string().required("music is required"),
+    descriptionCode: Yup.string().required("descriptionCode is required"),
+  }),
+ 
 //   Yup.object({
 //     age: Yup.number().required("Age is required").positive().integer(),
 //   }),
@@ -27,7 +44,6 @@ const validationSchema = [
 
 const StepperForm = () => {
   const [activeStep, setActiveStep] = useState(0);
-  console.log(activeStep, "activeStep---");
 
   const initialValues = {
     groomFirstName: "",
@@ -38,6 +54,19 @@ const StepperForm = () => {
     bridePhoneNumber: "",
     story: "",
     url: "",
+    foodOffered:"",
+    alcohol: false,
+    weddingDay:"",
+    address1:"",
+    address2:"",
+    venue:"",
+    state:"",
+    city:"",
+    zipCode:"",
+    event:"",
+    dressCode:"",
+    music:"",
+    descriptionCode:""
   };
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -77,7 +106,7 @@ const StepperForm = () => {
         return <Step2 />;
       case 2:
         return (
-          <div>{/* Add your datepicker and timepicker components here */}</div>
+          <div><Step3/></div>
         );
       default:
         return null;
