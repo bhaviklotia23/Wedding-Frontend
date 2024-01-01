@@ -15,7 +15,7 @@ const WeddingDayForm = ({ dayCount }) => {
   const { values, errors, touched, handleChange, handleBlur } =
     useFormikContext();
 
-    console.log("errors",errors)
+  console.log("errors", errors);
 
   const handleIncrement = () => {
     if (value < 5) {
@@ -58,7 +58,8 @@ const WeddingDayForm = ({ dayCount }) => {
       <Box
         sx={{
           display: { xs: "flex", md: "none" },
-        }}>
+        }}
+      >
         <Stack
           direction={{ xs: "column", md: "row" }}
           spacing={2}
@@ -99,9 +100,7 @@ const WeddingDayForm = ({ dayCount }) => {
             fontWeight: "bold",
             fontSize: "1.5rem",
             display: { xs: "flex", md: "none" },
-
           }}
-
         >
           Event Information
         </Typography>
@@ -114,13 +113,14 @@ const WeddingDayForm = ({ dayCount }) => {
             handleIncrement={handleIncrement}
             handleDecrement={handleDecrement}
             value={value}
-            title={`Events (Day ${dayCount})`}
+            title={`Events (Day ${dayCount + 1})`}
           />
           <Stack
             sx={{
               display: "flex",
-              alignItems: "flex-start"
-            }}>
+              alignItems: "flex-start",
+            }}
+          >
             <Typography
               sx={{
                 display: "flex",
@@ -141,13 +141,12 @@ const WeddingDayForm = ({ dayCount }) => {
               onBlur={handleBlur}
               error={touched.address1 && Boolean(errors.address1)}
               helperText={touched.address1 && errors.address1}
-
             />
           </Stack>
           <Stack
             sx={{
               display: "flex",
-              alignItems: "flex-start"
+              alignItems: "flex-start",
             }}
           >
             <Typography
@@ -175,7 +174,7 @@ const WeddingDayForm = ({ dayCount }) => {
           <Stack
             sx={{
               display: "flex",
-              alignItems: "flex-start"
+              alignItems: "flex-start",
             }}
           >
             <Typography
@@ -209,7 +208,7 @@ const WeddingDayForm = ({ dayCount }) => {
           <Stack
             sx={{
               display: "flex",
-              alignItems: "flex-start"
+              alignItems: "flex-start",
             }}
           >
             <Typography
@@ -237,7 +236,7 @@ const WeddingDayForm = ({ dayCount }) => {
           <Stack
             sx={{
               display: "flex",
-              alignItems: "flex-start"
+              alignItems: "flex-start",
             }}
           >
             <Typography
@@ -265,7 +264,7 @@ const WeddingDayForm = ({ dayCount }) => {
           <Stack
             sx={{
               display: "flex",
-              alignItems: "flex-start"
+              alignItems: "flex-start",
             }}
           >
             <Typography
@@ -279,7 +278,7 @@ const WeddingDayForm = ({ dayCount }) => {
               Zipcode
             </Typography>
             <TextField
-             id="zipCode"
+              id="zipCode"
               name="zipCode"
               color="warning"
               label="Zipcode"

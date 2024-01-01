@@ -8,7 +8,7 @@ import styled from "@emotion/styled";
 import * as Yup from "yup";
 
 const steps = ["Step 1", "Step 2", "Step 3"];
-console.log("steps",steps)
+console.log("steps", steps);
 
 const validationSchema = [
   Yup.object({
@@ -51,19 +51,19 @@ const StepperForm = () => {
     story: "",
     engagementVideo: "",
     url: "",
-    foodOffered:"",
+    foodOffered: "",
     alcohol: false,
-    weddingDay:"",
-    address1:"",
-    address2:"",
-    venue:"",
-    state:"",
-    city:"",
-    zipCode:"",
-    event:"",
-    dressCode:"",
-    music:"",
-    descriptionCode:""
+    weddingDay: 1,
+    address1: "",
+    address2: "",
+    venue: "",
+    state: "",
+    city: "",
+    zipCode: "",
+    event: "",
+    dressCode: "",
+    music: "",
+    descriptionCode: "",
   };
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -102,7 +102,7 @@ const StepperForm = () => {
       case 1:
         return <Step2 />;
       case 2:
-        return <Step3/>
+        return <Step3 />;
       default:
         return null;
     }

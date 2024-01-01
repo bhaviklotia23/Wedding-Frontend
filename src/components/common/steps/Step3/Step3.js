@@ -15,13 +15,11 @@ import WeddingDayForm from "./WeddingDayForm";
 import { useFormikContext } from "formik";
 
 const Step3 = () => {
-  const [value, setValue] = useState(1);
   const [tabValue, setTabValue] = useState(1);
- 
+  console.log(tabValue);
 
-  const { values, errors, touched, handleChange, handleBlur } =
+  const { values, errors, touched, setFieldValue, handleChange, handleBlur } =
     useFormikContext();
-
 
   const handleSwitchChange = (event) => {
     const { checked } = event.target;
@@ -29,34 +27,19 @@ const Step3 = () => {
   };
 
   const handleSelectChange = (event) => {
-    const { value } = event.target;
-    handleChange("foodOffered")(event); 
+    handleChange("foodOffered")(event);
   };
-
-  // const handleIncrement = () => {
-  //   if (value < 5) {
-  //     setValue(value + 1);
-  //   }
-  // };
-
-  // const handleDecrement = () => {
-  //   if (value > 1) {
-  //     setValue(value - 1);
-  //   }
-  // };
 
   const handleIncrement = () => {
     if (values.weddingDay < 5) {
-      const newValue = values.weddingDay + 1;
-      handleChange({ target: { name: "weddingDay", value: newValue } });
+      setFieldValue("weddingDay", (values.weddingDay || 1) + 1);
     }
   };
-  
 
   const handleDecrement = () => {
-    const newValue = values.weddingDay > 1 ? values.weddingDay - 1 : values.weddingDay;
-    console.log("newValue", newValue);
-    handleChange({ target: { name: "weddingDay", value: newValue } });
+    if (values.weddingDay > 1) {
+      setFieldValue("weddingDay", (values.weddingDay || 1) - 1);
+    }
   };
 
   return (
@@ -112,7 +95,6 @@ const Step3 = () => {
                   onChange={handleSelectChange}
                   onBlur={handleBlur}
                   name="foodOffered"
-
                 >
                   <MenuItem value="Vegetarian">Vegetarian</MenuItem>
                   <MenuItem value="Non-Vegetarian">Non-Vegetarian</MenuItem>
@@ -149,7 +131,7 @@ const Step3 = () => {
         rowSpacing={2}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
-        <Grid item >
+        <Grid item>
           {values.weddingDay > 0 && (
             <ColorTabs
               tabValue={tabValue}

@@ -35,7 +35,7 @@ const EventForm = ({ count }) => {
           fontSize: "1.5rem",
         }}
       >
-        Event {count}
+        Event {count + 1}
       </Typography>
       <Stack
         direction={{ xs: "column", md: "row" }}

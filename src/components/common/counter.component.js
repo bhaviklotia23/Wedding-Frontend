@@ -23,7 +23,6 @@ const CustomCounter = ({ handleDecrement, handleIncrement, value, title }) => {
         }}
       >
         <Button
-          onClick={handleDecrement}
           variant="outlined"
           sx={{
             borderColor: "black",
@@ -33,6 +32,7 @@ const CustomCounter = ({ handleDecrement, handleIncrement, value, title }) => {
               background: "black",
             },
           }}
+          onClick={handleDecrement}
         >
           <Typography sx={{ color: "white" }}>-</Typography>
         </Button>
@@ -48,7 +48,6 @@ const CustomCounter = ({ handleDecrement, handleIncrement, value, title }) => {
             textAlign: "center", // Center the text in TextField
           }}
         />
-
         <Button
           onClick={handleIncrement}
           variant="outlined"
