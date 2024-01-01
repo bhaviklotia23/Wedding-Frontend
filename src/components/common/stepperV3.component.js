@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import { Stepper, Step, StepLabel, Button, Box, Paper } from "@mui/material";
-import Step1 from "./steps/Step1"; // Step1 component
-import Step2 from "./steps/Step2"; // Step2 component
+import Step1 from "./steps/Step1";
+import Step2 from "./steps/Step2";
+import Step3 from "./steps/Step3/Step3";
 import styled from "@emotion/styled";
 import * as Yup from "yup";
 
@@ -20,14 +21,10 @@ const validationSchema = [
   Yup.object({
     story: Yup.string().required("Story is required"),
   }),
-//   Yup.object({
-//     age: Yup.number().required("Age is required").positive().integer(),
-//   }),
 ];
 
 const StepperForm = () => {
   const [activeStep, setActiveStep] = useState(0);
-  console.log(activeStep, "activeStep---");
 
   const initialValues = {
     groomFirstName: "",
@@ -37,7 +34,7 @@ const StepperForm = () => {
     brideLastName: "",
     bridePhoneNumber: "",
     story: "",
-    url: "",
+    engagementVideo: "",
   };
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -76,9 +73,7 @@ const StepperForm = () => {
       case 1:
         return <Step2 />;
       case 2:
-        return (
-          <div>{/* Add your datepicker and timepicker components here */}</div>
-        );
+        return <Step3 />;
       default:
         return null;
     }
