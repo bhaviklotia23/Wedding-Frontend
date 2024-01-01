@@ -53,14 +53,14 @@ const Step2 = () => {
           <TextField
             sx={{ width: "100%", maxWidth: { md: "85ch" } }}
             color="warning"
-            id="url"
-            name="url"
+            id="engagementVideo"
+            name="engagementVideo"
             label="Video URL"
-            value={values.url}
+            value={values.engagementVideo}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={touched.url && Boolean(errors.url)}
-            helperText={touched.url && errors.url}
+            error={touched.engagementVideo && Boolean(errors.engagementVideo)}
+            helperText={touched.engagementVideo && errors.engagementVideo}
           />
         </Stack>
       </Box>
