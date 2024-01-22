@@ -12,9 +12,23 @@ import DynamicAccordions from "../../../../pages/Test/Test";
 const MainForm = ({ index }) => {
   const { values, errors, touched, handleChange, handleBlur, setFieldValue } =
     useFormikContext();
+  console.log("values", values.totalEvents);
+
+  // const handleIncrement = () => {
+  //   if (values.totalEvents < 5) {
+  //     setFieldValue("totalEvents", (values.totalEvents || 1) + 1);
+  //   }
+  // };
+
+  // const handleDecrement = () => {
+  //   if (values.totalEvents > 1) {
+  //     setFieldValue("totalEvents", (values.totalEvents || 1) - 1);
+  //   }
+  // };
 
   const handleIncrement = () => {
     if (values.totalEvents < 5) {
+      const count = values.weddingDetails.length + 1;
       setFieldValue("totalEvents", (values.totalEvents || 1) + 1);
     }
   };
@@ -22,6 +36,8 @@ const MainForm = ({ index }) => {
   const handleDecrement = () => {
     if (values.totalEvents > 1) {
       setFieldValue("totalEvents", (values.totalEvents || 1) - 1);
+      const count = Math.max(values.weddingDetails.length - 1, 1);
+      // setFieldValue("weddingDetails", values.weddingDetails.slice(0, count));
     }
   };
 
@@ -130,13 +146,19 @@ const MainForm = ({ index }) => {
             <TextField
               color="warning"
               label="Address 1"
-              id="address1"
-              name="address1"
-              value={values.address1}
+              id={`address1_${index}`}
+              name={`address1_${index}`}
+              value={values[`address1_${index}`]}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={touched.address1 && Boolean(errors.address1)}
-              helperText={touched.address1 && errors.address1}
+              error={
+                touched[`address1_${index}`] &&
+                Boolean(errors[`address1_${index}`])
+              }
+              helperText={
+                touched[`address1_${index}`] && errors[`address1_${index}`]
+              }
+              required
             />
           </Stack>
           <Stack
@@ -158,13 +180,18 @@ const MainForm = ({ index }) => {
             <TextField
               color="warning"
               label="Address 2"
-              id="address2"
-              name="address2"
-              value={values.address2}
+              id={`address2_${index}`}
+              name={`address2_${index}`}
+              value={values[`address2_${index}`]}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={touched.address2 && Boolean(errors.address2)}
-              helperText={touched.address2 && errors.address2}
+              error={
+                touched[`address2_${index}`] &&
+                Boolean(errors[`address2_${index}`])
+              }
+              helperText={
+                touched[`address2_${index}`] && errors[`address2_${index}`]
+              }
             />
           </Stack>
           <Stack
@@ -186,13 +213,15 @@ const MainForm = ({ index }) => {
             <TextField
               color="warning"
               label="Name of Venue"
-              id="venue"
-              name="venue"
-              value={values.venue}
+              id={`venue_${index}`}
+              name={`venue_${index}`}
+              value={values[`venue_${index}`]}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={touched.venue && Boolean(errors.venue)}
-              helperText={touched.venue && errors.venue}
+              error={
+                touched[`venue_${index}`] && Boolean(errors[`venue_${index}`])
+              }
+              helperText={touched[`venue_${index}`] && errors[`venue_${index}`]}
             />
           </Stack>
         </Stack>
@@ -220,13 +249,15 @@ const MainForm = ({ index }) => {
             <TextField
               color="warning"
               label="State"
-              id="state"
-              name="state"
-              value={values.state}
+              id={`state_${index}`}
+              name={`state_${index}`}
+              value={values[`state_${index}`]}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={touched.state && Boolean(errors.state)}
-              helperText={touched.state && errors.state}
+              error={
+                touched[`state_${index}`] && Boolean(errors[`state_${index}`])
+              }
+              helperText={touched[`state_${index}`] && errors[`state_${index}`]}
             />
           </Stack>
           <Stack
@@ -248,13 +279,15 @@ const MainForm = ({ index }) => {
             <TextField
               color="warning"
               label="City"
-              id="city"
-              name="city"
-              value={values.city}
+              id={`city_${index}`}
+              name={`city_${index}`}
+              value={values[`city_${index}`]}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={touched.city && Boolean(errors.city)}
-              helperText={touched.city && errors.city}
+              error={
+                touched[`city_${index}`] && Boolean(errors[`city_${index}`])
+              }
+              helperText={touched[`city_${index}`] && errors[`city_${index}`]}
             />
           </Stack>
           <Stack
@@ -274,15 +307,20 @@ const MainForm = ({ index }) => {
               Zipcode
             </Typography>
             <TextField
-              id="zipCode"
-              name="zipCode"
+              id={`zipCode_${index}`}
+              name={`zipCode_${index}`}
               color="warning"
               label="Zipcode"
-              value={values.zipCode}
+              value={values[`zipCode_${index}`]}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={touched.zipCode && Boolean(errors.zipCode)}
-              helperText={touched.zipCode && errors.zipCode}
+              error={
+                touched[`zipCode_${index}`] &&
+                Boolean(errors[`zipCode_${index}`])
+              }
+              helperText={
+                touched[`zipCode_${index}`] && errors[`zipCode_${index}`]
+              }
             />
           </Stack>
         </Stack>
@@ -294,10 +332,24 @@ const MainForm = ({ index }) => {
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         >
           <Grid item>
+            {values.totalEvents > 0 && (
+              <>
+                {Array.from(
+                  { length: values.totalEvents },
+                  (_, accordionIndex) => (
+                    <DynamicAccordions title="Event" index={accordionIndex}>
+                      <EventForm index={accordionIndex} />
+                    </DynamicAccordions>
+                  )
+                )}
+              </>
+            )}
+          </Grid>
+          {/* <Grid item>
             <DynamicAccordions title="Event" count={values.totalEvents}>
               <EventForm count={values.totalEvents} />
             </DynamicAccordions>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Box>
     </>

@@ -5,7 +5,7 @@ import CustomizedSwitch from "../../switch.component";
 import { useTheme } from "@mui/material/styles";
 import { useFormikContext } from "formik";
 
-const EventForm = ({ count }) => {
+const EventForm = ({ count, index }) => {
   const theme = useTheme();
   const { values, errors, touched, handleChange, handleBlur } =
     useFormikContext();
@@ -45,13 +45,15 @@ const EventForm = ({ count }) => {
           <TextField
             color="warning"
             label="Event Name"
-            id="event"
-            name="event"
-            value={values.event}
+            id={`event_${index}`}
+            name={`event_${index}`}
+            value={values[`event_${index}`]}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={touched.event && Boolean(errors.event)}
-            helperText={touched.event && errors.event}
+            error={
+              touched[`event_${index}`] && Boolean(errors[`event_${index}`])
+            }
+            helperText={touched[`event_${index}`] && errors[`event_${index}`]}
           />
         </Stack>
         <Stack
@@ -73,13 +75,18 @@ const EventForm = ({ count }) => {
           <TextField
             color="warning"
             label="Dress code"
-            id="dressCode"
-            name="dressCode"
-            value={values.dressCode}
+            id={`dressCode_${index}`}
+            name={`dressCode_${index}`}
+            value={values[`dressCode_${index}`]}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={touched.dressCode && Boolean(errors.dressCode)}
-            helperText={touched.dressCode && errors.dressCode}
+            error={
+              touched[`dressCode_${index}`] &&
+              Boolean(errors[`dressCode_${index}`])
+            }
+            helperText={
+              touched[`dressCode_${index}`] && errors[`dressCode_${index}`]
+            }
           />
         </Stack>
         <Stack
@@ -139,13 +146,19 @@ const EventForm = ({ count }) => {
             color="warning"
             multiline
             rows={4}
-            id="descriptionCode"
-            name="descriptionCode"
-            value={values.descriptionCode}
+            id={`descriptionCode_${index}`}
+            name={`descriptionCode_${index}`}
+            value={values[`descriptionCode_${index}`]}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={touched.descriptionCode && Boolean(errors.descriptionCode)}
-            helperText={touched.descriptionCode && errors.descriptionCode}
+            error={
+              touched[`descriptionCode_${index}`] &&
+              Boolean(errors[`descriptionCode_${index}`])
+            }
+            helperText={
+              touched[`descriptionCode_${index}`] &&
+              errors[`descriptionCode_${index}`]
+            }
           />
         </Stack>
       </Stack>
