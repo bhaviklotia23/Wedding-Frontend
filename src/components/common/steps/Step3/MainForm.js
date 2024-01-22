@@ -7,25 +7,21 @@ import CustomCounter from "../../counter.component";
 import ColorTabs from "../../tabs.component";
 import EventForm from "./EventForm";
 import { useFormikContext } from "formik";
+import DynamicAccordions from "../../../../pages/Test/Test";
 
-const WeddingDayForm = ({ dayCount }) => {
-  // const { formData, dispatch } = useFormData();
-  const [value, setValue] = useState(1);
-  const [tabValue, setTabValue] = useState(1);
-  const { values, errors, touched, handleChange, handleBlur } =
+const MainForm = ({ index }) => {
+  const { values, errors, touched, handleChange, handleBlur, setFieldValue } =
     useFormikContext();
 
-  console.log("errors", errors);
-
   const handleIncrement = () => {
-    if (value < 5) {
-      setValue(value + 1);
+    if (values.totalEvents < 5) {
+      setFieldValue("totalEvents", (values.totalEvents || 1) + 1);
     }
   };
 
   const handleDecrement = () => {
-    if (value > 1) {
-      setValue(value - 1);
+    if (values.totalEvents > 1) {
+      setFieldValue("totalEvents", (values.totalEvents || 1) - 1);
     }
   };
 
@@ -112,8 +108,8 @@ const WeddingDayForm = ({ dayCount }) => {
           <CustomCounter
             handleIncrement={handleIncrement}
             handleDecrement={handleDecrement}
-            value={value}
-            title={`Events (Day ${dayCount + 1})`}
+            value={values.totalEvents}
+            title="Number of Events"
           />
           <Stack
             sx={{
@@ -298,14 +294,9 @@ const WeddingDayForm = ({ dayCount }) => {
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         >
           <Grid item>
-            <ColorTabs
-              tabValue={tabValue}
-              setTabValue={setTabValue}
-              count={value}
-              title="Event"
-            >
-              <EventForm count={tabValue} />
-            </ColorTabs>
+            <DynamicAccordions title="Event" count={values.totalEvents}>
+              <EventForm count={values.totalEvents} />
+            </DynamicAccordions>
           </Grid>
         </Grid>
       </Box>
@@ -313,4 +304,4 @@ const WeddingDayForm = ({ dayCount }) => {
   );
 };
 
-export default WeddingDayForm;
+export default MainForm;

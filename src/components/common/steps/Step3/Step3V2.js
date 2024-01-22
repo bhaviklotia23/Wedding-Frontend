@@ -9,39 +9,61 @@ import {
   Typography,
 } from "@mui/material";
 import CustomizedSwitch from "../../switch.component";
-import ColorTabs from "../../tabs.component";
 import CustomCounter from "../../counter.component";
+import { FieldArray, useFormikContext } from "formik";
+import DynamicAccordions from "../../../../pages/Test/Test";
 import MainForm from "./MainForm";
-import { useFormikContext } from "formik";
 
-const Step3 = () => {
-  const [tabValue, setTabValue] = useState(1);
-  console.log(tabValue);
-
+const Step3V2 = () => {
   const { values, errors, touched, setFieldValue, handleChange, handleBlur } =
     useFormikContext();
-
-  const handleSwitchChange = (event) => {
-    const { checked } = event.target;
-    handleChange({ target: { name: "alcohol", value: checked } });
-  };
-
-  const handleSelectChange = (event) => {
-    handleChange("foodOffered")(event);
-  };
+  console.log(values, "values---");
 
   const handleIncrement = () => {
     if (values.weddingDay < 5) {
+      const count = values.weddingDetails.length + 1;
       setFieldValue("weddingDay", (values.weddingDay || 1) + 1);
+      setFieldValue(
+        "weddingDetails",
+        Array.from({ length: count }, () => ({
+          startDt: "",
+          time: "",
+          state: "",
+          city: "",
+          zipcode: "",
+          address1: "",
+          address2: "",
+          nameOfVenue: "",
+          totalEvents: 1,
+          events: [
+            {
+              eventName: "",
+              description: "",
+              includedMeals: "",
+              dressCode: "",
+            },
+          ],
+        }))
+      );
     }
   };
 
   const handleDecrement = () => {
     if (values.weddingDay > 1) {
       setFieldValue("weddingDay", (values.weddingDay || 1) - 1);
+      const count = Math.max(values.weddingDetails.length - 1, 1);
+      setFieldValue("weddingDetails", values.weddingDetails.slice(0, count));
     }
   };
 
+  const handleSelectChange = (event) => {
+    handleChange("foodOffered")(event);
+  };
+
+  const handleSwitchChange = (event) => {
+    const { checked } = event.target;
+    handleChange({ target: { name: "alcohol", value: checked } });
+  };
   return (
     <Box sx={{ width: "100%" }}>
       <Typography
@@ -133,14 +155,16 @@ const Step3 = () => {
       >
         <Grid item>
           {values.weddingDay > 0 && (
-            <ColorTabs
-              tabValue={tabValue}
-              setTabValue={setTabValue}
-              count={values.weddingDay}
-              title="Day"
-            >
-              <MainForm dayCount={tabValue} />
-            </ColorTabs>
+            <>
+              {Array.from(
+                { length: values.weddingDay },
+                (_, accordionIndex) => (
+                  <DynamicAccordions title="Day" index={accordionIndex}>
+                    <MainForm index={accordionIndex} />
+                  </DynamicAccordions>
+                )
+              )}
+            </>
           )}
         </Grid>
       </Grid>
@@ -148,4 +172,4 @@ const Step3 = () => {
   );
 };
 
-export default Step3;
+export default Step3V2;

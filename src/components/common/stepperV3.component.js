@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Formik, Form } from "formik";
+import { Formik, Form, useFormikContext } from "formik";
 import { Stepper, Step, StepLabel, Button, Box, Paper } from "@mui/material";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3/Step3";
+import Step3V2 from "./steps/Step3/Step3V2";
 import styled from "@emotion/styled";
 import * as Yup from "yup";
 
@@ -41,6 +42,13 @@ const validationSchema = [
 const StepperForm = () => {
   const [activeStep, setActiveStep] = useState(0);
 
+  // const { values } = useFormikContext();
+
+  // const dynamicFormsLength = values.weddingDay || 1;
+  // const dayCount = values.dayCount || 1;
+  // const totalEvents = values.totalEvents || 1;
+  // const eventCount = values.eventCount || 1;
+
   const initialValues = {
     groomFirstName: "",
     groomLastName: "",
@@ -64,6 +72,38 @@ const StepperForm = () => {
     dressCode: "",
     music: "",
     descriptionCode: "",
+    totalEvents: 1,
+    weddingDetails: [
+      {
+        startDt: "",
+        time: "",
+        state: "",
+        city: "",
+        zipcode: "",
+        address1: "",
+        address2: "",
+        nameOfVenue: "",
+        totalEvents: 1,
+        events: [
+          { eventName: "", description: "", includedMeals: "", dressCode: "" },
+        ],
+      },
+    ],
+    // weddingDetails: Array.from({ length: dynamicFormsLength }, () => ({
+    //   // initial dynamic form values
+    //   dayCount: dayCount,
+    //   startDt: "",
+    //   time: "",
+    //   state: "",
+    //   city: "",
+    //   events: Array.from({ length: totalEvents }, () => ({
+    //     // initial dynamic form values
+    //     eventCount: eventCount,
+    //     eventName: "",
+    //     description: "",
+    //     includedMeals: "",
+    //   })),
+    // })),
   };
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -102,7 +142,8 @@ const StepperForm = () => {
       case 1:
         return <Step2 />;
       case 2:
-        return <Step3 />;
+        // return <Step3 />;
+        return <Step3V2 />;
       default:
         return null;
     }

@@ -3,6 +3,9 @@ import Home from "../pages/Home/Home";
 import Contact from "../pages/Contact/Contact";
 import Gallery from "../pages/Gallery/Gallery";
 import HostWedding from "../pages/HostWedding/HostWedding";
+import CustomTabs from "../pages/Test/CustomTabs";
+import { Step3DataProvider } from "../context/Step3Context";
+import Test from "../pages/Test/Test";
 
 export const Router = [
   {
@@ -14,6 +17,15 @@ export const Router = [
       { path: "/contact", element: <Contact /> },
       { path: "/gallery", element: <Gallery /> },
       { path: "/host_wedding", element: <HostWedding /> },
+      {
+        path: "/test",
+        element: (
+          <Test />
+          // <Step3DataProvider>
+          //   <CustomTabs />
+          // </Step3DataProvider>
+        ),
+      },
     ],
   },
 

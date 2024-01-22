@@ -6,37 +6,21 @@ import { useTheme } from "@mui/material/styles";
 import { useFormikContext } from "formik";
 
 const EventForm = ({ count }) => {
-  // const { formData, dispatch } = useFormData();
-  const [checked, setChecked] = useState(false);
   const theme = useTheme();
   const { values, errors, touched, handleChange, handleBlur } =
     useFormikContext();
-
 
   const handleSwitchChange = (event) => {
     const { checked } = event.target;
     handleChange({ target: { name: "music", value: checked } });
   };
 
-
-  const handleChanges = (event) => {
-    setChecked(event.target.checked);
-  };
-
   return (
     <Box
       sx={{
         marginLeft: { xs: "-30px", md: "none" },
-      }}>
-      <Typography
-        sx={{
-          margin: "0.5rem 0 1rem 0",
-          fontWeight: "bold",
-          fontSize: "1.5rem",
-        }}
-      >
-        Event {count + 1}
-      </Typography>
+      }}
+    >
       <Stack
         direction={{ xs: "column", md: "row" }}
         spacing={2}
@@ -45,7 +29,7 @@ const EventForm = ({ count }) => {
         <Stack
           sx={{
             display: "flex",
-            alignItems: "flex-start"
+            alignItems: "flex-start",
           }}
         >
           <Typography
@@ -73,7 +57,7 @@ const EventForm = ({ count }) => {
         <Stack
           sx={{
             display: "flex",
-            alignItems: "flex-start"
+            alignItems: "flex-start",
           }}
         >
           <Typography
@@ -101,7 +85,7 @@ const EventForm = ({ count }) => {
         <Stack
           sx={{
             display: "flex",
-            alignItems: "flex-start"
+            alignItems: "flex-start",
           }}
         >
           <Typography
@@ -131,7 +115,7 @@ const EventForm = ({ count }) => {
         <Stack
           sx={{
             display: "flex",
-            alignItems: "flex-start"
+            alignItems: "flex-start",
           }}
         >
           <Typography

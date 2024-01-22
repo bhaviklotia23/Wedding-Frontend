@@ -2,6 +2,7 @@ import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import React from "react";
 
 const CustomCounter = ({ handleDecrement, handleIncrement, value, title }) => {
+  console.log(value, 'val')
   return (
     <Stack>
       <Typography
