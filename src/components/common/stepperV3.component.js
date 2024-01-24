@@ -10,6 +10,7 @@ import Step3 from "./steps/Step3/Step3";
 import Step3V2 from "./steps/Step3/Step3V2";
 import styled from "@emotion/styled";
 import * as Yup from "yup";
+import axios from "axios";
 
 const steps = ["Step 1", "Step 2", "Step 3", "Step 4"];
 
@@ -33,21 +34,16 @@ const StepperForm = () => {
     brideLastName: "",
     bridePhoneNumber: "",
     story: "",
-    engagementVideo: "",
+    guidefirstname: "",
+    guidelastname: "",
+    guideemail: "",
+    guidephoneNumber: "",
+    guiderealtionship: "",
+    // engagementVideo: "",
     url: "",
     foodOffered: "",
     alcohol: false,
     weddingDay: 1,
-    address1: "",
-    address2: "",
-    venue: "",
-    state: "",
-    city: "",
-    zipCode: "",
-    event: "",
-    dressCode: "",
-    music: "",
-    descriptionCode: "",
     totalEvents: 1,
     weddingDetails: [
       {
@@ -60,9 +56,8 @@ const StepperForm = () => {
         address2: "",
         nameOfVenue: "",
         totalEvents: 1,
-        events: [
-          { eventName: "", description: "", includedMeals: "", dressCode: "" },
-        ],
+
+        events: [{ eventName: "", description: "", dressCode: "", music: "" }],
       },
     ],
     // weddingDetails: Array.from({ length: dynamicFormsLength }, () => ({
@@ -89,10 +84,79 @@ const StepperForm = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleSubmit = (values) => {
-    console.log(values, "bhavik");
-    // Handle final form submission here
-    console.log(values);
+  const handleSubmit = async (values) => {
+    try {
+      const {
+        groomFirstName,
+        groomLastName,
+        groomPhoneNumber,
+        brideFirstName,
+        brideLastName,
+        bridePhoneNumber,
+        url,
+        foodOffered,
+        alcohol,
+        weddingDay,
+        event,
+        totalEvents,
+        weddingDetails,
+        guidefirstname,
+        guidelastname,
+        guideemail,
+        guidephoneNumber,
+        guiderealtionship,
+      } = values;
+
+      // Creating the payload
+      const payload = {
+        groom: {
+          groomFirstName,
+          groomLastName,
+          groomPhoneNumber,
+        },
+        bride: {
+          brideFirstName,
+          brideLastName,
+          bridePhoneNumber,
+        },
+        guide: {
+          guidefirstname,
+          guidelastname,
+          guideemail,
+          guidephoneNumber,
+          guiderealtionship,
+        },
+        url,
+        foodOffered,
+        alcohol,
+        weddingDay,
+        event,
+        weddingDetails: weddingDetails.map((detail) => ({
+          startDt: detail.startDt,
+          time: detail.time,
+          state: detail.state,
+          city: detail.city,
+          zipcode: detail.zipcode,
+          address1: detail.address1,
+          address2: detail.address2,
+          nameOfVenue: detail.nameOfVenue,
+          totalEvents: detail.totalEvents,
+          events: detail.events.map((event) => ({
+            eventName: event.eventName,
+            description: event.description,
+            dressCode: event.dressCode,
+            music: event.music,
+          })),
+        })),
+      };
+
+      const res = await axios.post(
+        "http://localhost:5000/api/v1/registerWedding",
+        payload
+      );
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const DemoPaper = styled(Paper)(({ theme }) => ({
@@ -116,7 +180,7 @@ const StepperForm = () => {
     alcohol: Yup.string().required("alcohol is required"),
     address1: Yup.string().required("address1 is required"),
     address2: Yup.string().required("address2 is required"),
-    venue: Yup.string().required("venue is required"),
+    nameOfVenue: Yup.string().required("venue is required"),
     state: Yup.string().required("state is required"),
     city: Yup.string().required("city is required"),
     zipCode: Yup.string().required("zipCode is required"),
@@ -168,8 +232,8 @@ const StepperForm = () => {
     Yup.object({
       story: Yup.string().required("Story is required"),
     }),
-    // Yup.object(validationSchemaObjectForStep3),
-    // Yup.object(validationSchemaObjectForEventStep3),
+    Yup.object(validationSchemaObjectForStep3),
+    Yup.object(validationSchemaObjectForEventStep3),
   ];
   const getStepContent = (step) => {
     switch (step) {
@@ -191,7 +255,7 @@ const StepperForm = () => {
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={validationSchema[activeStep]}
+      // validationSchema={validationSchema[activeStep]}
       onSubmit={activeStep === steps.length - 1 ? handleSubmit : handleNext}
     >
       {({ values, errors, touched, handleChange, handleBlur }) => {
