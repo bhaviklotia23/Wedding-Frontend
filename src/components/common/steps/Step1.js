@@ -73,11 +73,11 @@ const Step1 = () => {
         </Typography>
         <Stack
           direction={{ xs: "column", md: "row" }}
-          // spacing={{ xs: 2, md: 4 }} 
+          // spacing={{ xs: 2, md: 4 }}
           // sx={{
           //   display: "flex",
           //   justifyContent: "center",
-          //   flexWrap: "wrap", 
+          //   flexWrap: "wrap",
           // }}
 
           spacing={2}

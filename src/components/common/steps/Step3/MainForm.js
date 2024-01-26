@@ -12,16 +12,91 @@ import DynamicAccordions from "../../../../pages/Test/Test";
 const MainForm = ({ index }) => {
   const { values, errors, touched, handleChange, handleBlur, setFieldValue } =
     useFormikContext();
+  console.log("values", values);
+
+  // const handleIncrement = () => {
+  //   if (values.totalEvents < 5) {
+  //     setFieldValue("totalEvents", (values.totalEvents || 1) + 1);
+  //   }
+  // };
+
+  // const handleDecrement = () => {
+  //   if (values.totalEvents > 1) {
+  //     setFieldValue("totalEvents", (values.totalEvents || 1) - 1);
+  //   }
+  // };
+
+  // const handleIncrement = () => {
+  //   if (values.totalEvents < 5) {
+  //     const count = values.weddingDetails.length + 1;
+  //     setFieldValue("totalEvents", (values.totalEvents || 1) + 1);
+  //   }
+  // };
+
+  // const handleDecrement = () => {
+  //   if (values.totalEvents > 1) {
+  //     setFieldValue("totalEvents", (values.totalEvents || 1) - 1);
+  //     const count = Math.max(values.weddingDetails.length - 1, 1);
+  //     // setFieldValue("weddingDetails", values.weddingDetails.slice(0, count));
+  //   }
+  // };
 
   const handleIncrement = () => {
     if (values.totalEvents < 5) {
+      const count = values.weddingDetails.length + 1;
       setFieldValue("totalEvents", (values.totalEvents || 1) + 1);
+
+      const newWeddingDetails = [
+        ...values.weddingDetails,
+        ...Array.from({ length: 1 }, () => ({
+          startDt: "",
+          time: "",
+          state: "",
+          city: "",
+          zipcode: "",
+          address1: "",
+          address2: "",
+          nameOfVenue: "",
+          totalEvents: 1,
+          events: [
+            {
+              eventName: "",
+              description: "",
+              includedMeals: "",
+              dressCode: "",
+            },
+          ],
+        })),
+      ];
+
+      setFieldValue("weddingDetails", newWeddingDetails);
     }
   };
 
   const handleDecrement = () => {
     if (values.totalEvents > 1) {
       setFieldValue("totalEvents", (values.totalEvents || 1) - 1);
+      const count = Math.max(values.weddingDetails.length - 1, 1);
+      setFieldValue("weddingDetails", values.weddingDetails.slice(0, count));
+    }
+  };
+
+  const handleMainChange = (event, index, field) => {
+    const updatedWeddingDetails = [...values.weddingDetails];
+
+    const fieldsToUpdate = [
+      "address1",
+      "address2",
+      "nameOfVenue",
+      "zipcode",
+      "city",
+      "state",
+    ];
+
+    if (fieldsToUpdate.includes(field)) {
+      updatedWeddingDetails[index][field] = event.target.value;
+      setFieldValue("weddingDetails", updatedWeddingDetails);
+      handleChange(event);
     }
   };
 
@@ -130,13 +205,25 @@ const MainForm = ({ index }) => {
             <TextField
               color="warning"
               label="Address 1"
-              id="address1"
-              name="address1"
-              value={values.address1}
-              onChange={handleChange}
+              id={`address1_${index}`}
+              name={
+                `address1_${index}` ||
+                (values.weddingDetails && `weddingDetails[${index}].address1`)
+              }
+              value={
+                values[`address1_${index}`] ||
+                (values.weddingDetails &&
+                  values.weddingDetails[index]?.address1)
+              }
+              onChange={(event) => handleMainChange(event, index, "address1")}
               onBlur={handleBlur}
-              error={touched.address1 && Boolean(errors.address1)}
-              helperText={touched.address1 && errors.address1}
+              error={Boolean(
+                touched[`address1_${index}`] && errors[`address1_${index}`]
+              )}
+              helperText={
+                touched[`address1_${index}`] && errors[`address1_${index}`]
+              }
+              // required
             />
           </Stack>
           <Stack
@@ -158,13 +245,25 @@ const MainForm = ({ index }) => {
             <TextField
               color="warning"
               label="Address 2"
-              id="address2"
-              name="address2"
-              value={values.address2}
-              onChange={handleChange}
+              id={`address2_${index}`}
+              name={
+                `address2_${index}` ||
+                (values.weddingDetails && `weddingDetails[${index}].address2`)
+              }
+              value={
+                values[`address1_${index}`] ||
+                (values.weddingDetails &&
+                  values.weddingDetails[index]?.address2)
+              }
+              onChange={(event) => handleMainChange(event, index, "address2")}
               onBlur={handleBlur}
-              error={touched.address2 && Boolean(errors.address2)}
-              helperText={touched.address2 && errors.address2}
+              error={
+                touched[`address2_${index}`] &&
+                Boolean(errors[`address2_${index}`])
+              }
+              helperText={
+                touched[`address2_${index}`] && errors[`address2_${index}`]
+              }
             />
           </Stack>
           <Stack
@@ -186,13 +285,29 @@ const MainForm = ({ index }) => {
             <TextField
               color="warning"
               label="Name of Venue"
-              id="venue"
-              name="venue"
-              value={values.venue}
-              onChange={handleChange}
+              id={`nameOfVenue_${index}`}
+              name={
+                `nameOfVenue_${index}` ||
+                (values.weddingDetails &&
+                  `weddingDetails[${index}].nameOfVenue`)
+              }
+              value={
+                values[`nameOfVenue_${index}`] ||
+                (values.weddingDetails &&
+                  values.weddingDetails[index]?.nameOfVenue)
+              }
+              onChange={(event) =>
+                handleMainChange(event, index, "nameOfVenue")
+              }
               onBlur={handleBlur}
-              error={touched.venue && Boolean(errors.venue)}
-              helperText={touched.venue && errors.venue}
+              error={
+                touched[`nameOfVenue_${index}`] &&
+                Boolean(errors[`nameOfVenue_${index}`])
+              }
+              helperText={
+                touched[`nameOfVenue_${index}`] &&
+                errors[`nameOfVenue_${index}`]
+              }
             />
           </Stack>
         </Stack>
@@ -220,13 +335,21 @@ const MainForm = ({ index }) => {
             <TextField
               color="warning"
               label="State"
-              id="state"
-              name="state"
-              value={values.state}
-              onChange={handleChange}
+              id={`state_${index}`}
+              name={
+                `state_${index}` ||
+                (values.weddingDetails && `weddingDetails[${index}].state`)
+              }
+              value={
+                values[`state_${index}`] ||
+                (values.weddingDetails && values.weddingDetails[index]?.state)
+              }
+              onChange={(event) => handleMainChange(event, index, "state")}
               onBlur={handleBlur}
-              error={touched.state && Boolean(errors.state)}
-              helperText={touched.state && errors.state}
+              error={
+                touched[`state_${index}`] && Boolean(errors[`state_${index}`])
+              }
+              helperText={touched[`state_${index}`] && errors[`state_${index}`]}
             />
           </Stack>
           <Stack
@@ -248,13 +371,21 @@ const MainForm = ({ index }) => {
             <TextField
               color="warning"
               label="City"
-              id="city"
-              name="city"
-              value={values.city}
-              onChange={handleChange}
+              id={`city_${index}`}
+              name={
+                `city_${index}` ||
+                (values.weddingDetails && `weddingDetails[${index}].city`)
+              }
+              value={
+                values[`city_${index}`] ||
+                (values.weddingDetails && values.weddingDetails[index]?.city)
+              }
+              onChange={(event) => handleMainChange(event, index, "city")}
               onBlur={handleBlur}
-              error={touched.city && Boolean(errors.city)}
-              helperText={touched.city && errors.city}
+              error={
+                touched[`city_${index}`] && Boolean(errors[`city_${index}`])
+              }
+              helperText={touched[`city_${index}`] && errors[`city_${index}`]}
             />
           </Stack>
           <Stack
@@ -274,15 +405,26 @@ const MainForm = ({ index }) => {
               Zipcode
             </Typography>
             <TextField
-              id="zipCode"
-              name="zipCode"
+              id={`zipcode_${index}`}
+              name={
+                `zipcode_${index}` ||
+                (values.weddingDetails && `weddingDetails[${index}].zipcode`)
+              }
+              value={
+                values[`zipcode_${index}`] ||
+                (values.weddingDetails && values.weddingDetails[index]?.zipcode)
+              }
               color="warning"
               label="Zipcode"
-              value={values.zipCode}
-              onChange={handleChange}
+              onChange={(event) => handleMainChange(event, index, "zipcode")}
               onBlur={handleBlur}
-              error={touched.zipCode && Boolean(errors.zipCode)}
-              helperText={touched.zipCode && errors.zipCode}
+              error={
+                touched[`zipcode_${index}`] &&
+                Boolean(errors[`zipcode_${index}`])
+              }
+              helperText={
+                touched[`zipcode_${index}`] && errors[`zipcode_${index}`]
+              }
             />
           </Stack>
         </Stack>
@@ -294,10 +436,24 @@ const MainForm = ({ index }) => {
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         >
           <Grid item>
+            {values.totalEvents > 0 && (
+              <>
+                {Array.from(
+                  { length: values.totalEvents },
+                  (_, accordionIndex) => (
+                    <DynamicAccordions title="Event" index={accordionIndex}>
+                      <EventForm index={accordionIndex} />
+                    </DynamicAccordions>
+                  )
+                )}
+              </>
+            )}
+          </Grid>
+          {/* <Grid item>
             <DynamicAccordions title="Event" count={values.totalEvents}>
               <EventForm count={values.totalEvents} />
             </DynamicAccordions>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Box>
     </>

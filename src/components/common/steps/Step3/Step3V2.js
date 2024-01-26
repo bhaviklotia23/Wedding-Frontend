@@ -17,15 +17,15 @@ import MainForm from "./MainForm";
 const Step3V2 = () => {
   const { values, errors, touched, setFieldValue, handleChange, handleBlur } =
     useFormikContext();
-  console.log(values, "values---");
 
   const handleIncrement = () => {
     if (values.weddingDay < 5) {
       const count = values.weddingDetails.length + 1;
       setFieldValue("weddingDay", (values.weddingDay || 1) + 1);
-      setFieldValue(
-        "weddingDetails",
-        Array.from({ length: count }, () => ({
+
+      const newWeddingDetails = [
+        ...values.weddingDetails,
+        ...Array.from({ length: 1 }, () => ({
           startDt: "",
           time: "",
           state: "",
@@ -43,8 +43,10 @@ const Step3V2 = () => {
               dressCode: "",
             },
           ],
-        }))
-      );
+        })),
+      ];
+
+      setFieldValue("weddingDetails", newWeddingDetails);
     }
   };
 

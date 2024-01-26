@@ -1,9 +1,11 @@
 import { Box, Stack, TextField, Typography } from "@mui/material";
+import { useFormikContext } from "formik";
 import React from "react";
 // import { useFormData } from "../../../context/FormDataContext";
 
 const Step4 = () => {
-  // const { formData, dispatch } = useFormData();
+  const { values, errors, touched, handleChange, handleBlur } =
+    useFormikContext();
 
   return (
     <>
@@ -50,30 +52,36 @@ const Step4 = () => {
         >
           <TextField
             color="warning"
+            id="guidefirstname"
+            name="guidefirstname"
             label="First Name"
-            // value={formData.name}
-            onChange={
-              (e) => {}
-              // dispatch({ type: "update", payload: { name: e.target.value } })
-            }
+            value={values.guidefirstname}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.guidefirstname && Boolean(errors.guidefirstname)}
+            helperText={touched.guidefirstname && errors.guidefirstname}
           />
           <TextField
             color="warning"
+            id="guidelastname"
+            name="guidelastname"
             label="Last Name"
-            // value={formData.email}
-            onChange={
-              (e) => {}
-              // dispatch({ type: "update", payload: { email: e.target.value } })
-            }
+            value={values.guidelastname}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.guidelastname && Boolean(errors.guidelastname)}
+            helperText={touched.guidelastname && errors.guidelastname}
           />
           <TextField
             color="warning"
+            id="guidephoneNumber"
+            name="guidephoneNumber"
             label="Phone Number"
-            // value={formData.email}
-            onChange={
-              (e) => {}
-              // dispatch({ type: "update", payload: { email: e.target.value } })
-            }
+            value={values.guidephoneNumber}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.guidephoneNumber && Boolean(errors.guidephoneNumber)}
+            helperText={touched.guidephoneNumber && errors.guidephoneNumber}
           />
         </Stack>
       </Box>
@@ -88,21 +96,27 @@ const Step4 = () => {
         >
           <TextField
             color="warning"
+            id="guideemail"
+            name="guideemail"
             label="Email"
-            // value={formData.name}
-            onChange={
-              (e) => {}
-              // dispatch({ type: "update", payload: { name: e.target.value } })
-            }
+            value={values.guideemail}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.guideemail && Boolean(errors.guideemail)}
+            helperText={touched.guideemail && errors.guideemail}
           />
           <TextField
             color="warning"
-            label="Relationship to Couple"
-            // value={formData.email}
-            onChange={
-              (e) => {}
-              // dispatch({ type: "update", payload: { email: e.target.value } })
+            id="guiderealtionship"
+            name="guiderealtionship"
+            label="Realtionship of couple"
+            value={values.guiderealtionship}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={
+              touched.guiderealtionship && Boolean(errors.guiderealtionship)
             }
+            helperText={touched.guiderealtionship && errors.guiderealtionship}
           />
         </Stack>
       </Box>

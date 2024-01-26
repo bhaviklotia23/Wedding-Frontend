@@ -6,6 +6,8 @@ import {
   faCar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CardCom from "../common/card/CardCom";
+import { Button } from "@mui/material";
 
 const HomeSection3 = () => {
   return (
@@ -25,7 +27,8 @@ const HomeSection3 = () => {
                 <div class="agileits-border"> </div>
               </div>
               <div class="popular-agileinfo">
-                <div class="col-md-3 popular-grid">
+                <CardCom />
+                {/* <div class="col-md-3 popular-grid">
                   <FontAwesomeIcon
                     icon={faBell}
                     style={{ color: "#ffffff" }}
@@ -63,8 +66,13 @@ const HomeSection3 = () => {
                     Itaque earum rerum hic tenetur a sapiente delectus
                     reiciendis maiores hasellus
                   </p>
-                </div>
+                </div> */}
                 <div class="clearfix"> </div>
+              </div>
+              <div class="popular-agileinfo">
+                <Button variant="contained" sx={{ borderRadius: "20px" }}>
+                  See All Upcoming Weddings
+                </Button>
               </div>
             </div>
           </div>
