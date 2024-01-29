@@ -8,8 +8,11 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CardCom from "../common/card/CardCom";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const HomeSection3 = () => {
+  const navigate = useNavigate();
+
   return (
     <div
       style={{
@@ -70,7 +73,11 @@ const HomeSection3 = () => {
                 <div class="clearfix"> </div>
               </div>
               <div class="popular-agileinfo">
-                <Button variant="contained" sx={{ borderRadius: "20px" }}>
+                <Button
+                  variant="contained"
+                  sx={{ borderRadius: "20px" }}
+                  onClick={() => navigate("/wedding-details")}
+                >
                   See All Upcoming Weddings
                 </Button>
               </div>
