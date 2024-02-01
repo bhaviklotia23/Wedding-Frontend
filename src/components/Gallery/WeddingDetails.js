@@ -10,8 +10,11 @@ import {
   Typography,
 } from "@mui/material";
 import Image2 from "../../images/Gallery/gallery7.jpg";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@mui/system";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import moment from "moment";
 
 const VisitAnotherBox = styled("div")({
   textAlign: "center",
@@ -24,6 +27,30 @@ const VisitAnotherCard = styled(Card)({
 });
 
 const WeddingDetails = () => {
+  const state = useLocation();
+  console.log("state", state.state.item?._id);
+
+  const [allGetWeddingDetails, setAllGetWeddingDetails] = useState([]);
+  console.log("allGetWeddingDetails", allGetWeddingDetails);
+
+  const getWeddingDetails = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:5000/api/v1//wedding/${state.state.item?._id}`
+      );
+
+      // if (res?.data?.status === true) {
+      setAllGetWeddingDetails(res?.data?.data);
+
+      // } else {
+      // }
+    } catch (err) {}
+  };
+
+  useEffect(() => {
+    getWeddingDetails();
+  }, []);
+
   return (
     <div>
       <div
@@ -41,7 +68,7 @@ const WeddingDetails = () => {
                 <CardActionArea>
                   <CardMedia
                     component="img"
-                    image={Image2}
+                    image={allGetWeddingDetails?.photo}
                     alt="wedding"
                     sx={{
                       height: "500px",
@@ -62,6 +89,10 @@ const WeddingDetails = () => {
                       backgroundColor: "rgba(0, 0, 0, 0.5)",
                     }}
                   >
+                    {allGetWeddingDetails?.bridefirstname || "John"}{" "}
+                    {allGetWeddingDetails?.bridelastname || "jocky"} &{" "}
+                    {allGetWeddingDetails?.groomfirstName || "MK"}{" "}
+                    {allGetWeddingDetails?.groomlastName || "CK"} WEDDING
                     WEDDING
                   </Typography>
                 </CardActionArea>
@@ -81,7 +112,7 @@ const WeddingDetails = () => {
                               fontWeight: "700",
                             }}
                           >
-                            Day 1
+                            {`Day ${allGetWeddingDetails?.daysOfWedding}`}
                           </Typography>
                         </Box>
 
@@ -182,161 +213,107 @@ const WeddingDetails = () => {
                   <CardContent>
                     <Typography variant="h6">About the hosts</Typography>
                     <Typography variant="subtitle1">
-                      Jasjot & Simranjeet's story
+                      {allGetWeddingDetails?.bridefirstname || "John"}{" "}
+                      {allGetWeddingDetails?.bridelastname || "jocky"} &{" "}
+                      {allGetWeddingDetails?.groomfirstName || "MK"}{" "}
+                      {allGetWeddingDetails?.groomlastName || "CK"} story
                     </Typography>
                     <Typography variant="body1">
-                      I work in a bank, and she works in an IT company. We met
-                      on a matrimonial site. Her father called me as they liked
-                      my profile, and I liked her profile too. Her father
-                      allowed us some time to get to know each other. But she
-                      was not ready for marriage due to her recent breakup and
-                      asked me to reject her. We started chatting, gave time to
-                      each other. I started liking her, but she needs some time,
-                      and I am ready to wait for her. A day came when I proposed
-                      to her, and she accepted it. The best thing about us is
-                      that it's been more than 6 months of our relationship, and
-                      we never fought. We understand each other, respect each
-                      other's families. We both have a joint family. Our culture
-                      is the same, and our love is the same for each other.
+                      {allGetWeddingDetails?.story}
                     </Typography>
                   </CardContent>
                 </Card>
               </Grid>
 
               <Grid sx={{ marginTop: "20px" }}>
-                <Card sx={{ width: "100%", marginBottom: "20px" }}>
-                  <CardContent>
-                    <Grid container spacing={2}>
-                      <Grid item xs={12}>
-                        {/* Day Title */}
-                        <Typography variant="h6" gutterBottom>
-                          Day 1 | Friday, January 26, 2024 | Sri Ganganagar
-                        </Typography>
+                {allGetWeddingDetails?.weddingDetails?.map((item) => {
+                  return (
+                    <>
+                      <Card sx={{ width: "100%", marginBottom: "20px" }}>
+                        <CardContent>
+                          <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                              {/* Day Title */}
+                              <Typography variant="h6" gutterBottom>
+                                Day 1 |{" "}
+                                {moment(item?.startDt).format(
+                                  "dddd, MMMM DD, YYYY"
+                                )}{" "}
+                                | {item?.city}
+                              </Typography>
 
-                        {/* Starting Time */}
-                        <Typography variant="body1">
-                          Starting time (approximately):{" "}
-                          <strong>5:00 PM</strong>
-                        </Typography>
+                              {/* Starting Time */}
+                              <Typography variant="body1">
+                                Starting time (approximately):{" "}
+                                <strong>{item?.time}</strong>
+                              </Typography>
 
-                        <Typography variant="body1" className="margin-bottom-1">
-                          Venue and host contact details will be disclosed upon
-                          booking.
-                        </Typography>
+                              <Typography
+                                variant="body1"
+                                className="margin-bottom-1"
+                              >
+                                Venue and host contact details will be disclosed
+                                upon booking.
+                              </Typography>
 
-                        <div
-                          className="info-container"
-                          style={{ marginTop: "20px" }}
-                        >
-                          <label>Accommodation:</label>
-                          <strong>Not included</strong>
-                        </div>
-                        <div className="info-container">
-                          <label>Transportation:</label>
-                          <strong>Not included</strong>
-                        </div>
+                              <div
+                                className="info-container"
+                                style={{ marginTop: "20px" }}
+                              >
+                                <label>Accommodation:</label>
+                                <strong>Not included</strong>
+                              </div>
+                              <div className="info-container">
+                                <label>Transportation:</label>
+                                <strong>Not included</strong>
+                              </div>
+                              {item?.events?.map((row) => {
+                                return (
+                                  <>
+                                    <div
+                                      style={{
+                                        marginTop: "10px",
+                                        marginBottom: "10px",
+                                      }}
+                                    >
+                                      <Typography
+                                        variant="subtitle1"
+                                        className="margin-bottom-1"
+                                      >
+                                        {row?.eventName}
+                                      </Typography>
 
-                        <div
-                          style={{ marginTop: "10px", marginBottom: "10px" }}
-                        >
-                          <Typography
-                            variant="subtitle1"
-                            className="margin-bottom-1"
-                          >
-                            Sangeet/Jaago
-                          </Typography>
+                                      <Typography
+                                        variant="body1"
+                                        sx={{
+                                          marginBottom: "15px",
+                                          marginTop: "15px",
+                                        }}
+                                      >
+                                        {row?.description}
+                                      </Typography>
 
-                          <Typography
-                            variant="body1"
-                            sx={{ marginBottom: "15px", marginTop: "15px" }}
-                          >
-                            Jaggo is a time for singing and dancing where the
-                            bride's female relatives will dance with pots on
-                            their heads decorated with oil candles. Celebration
-                            includes dancing, food, and enjoyment.
-                          </Typography>
-
-                          {/* Music/Dancing and Dress Code Details */}
-                          <div className="info-container">
-                            <label>Music / Dancing:</label>
-                            <strong>Yes</strong>
-                          </div>
-                          <div className="info-container">
-                            <label>Dress Code:</label>
-                            <strong>Traditional Indian</strong>
-                          </div>
-                        </div>
-                      </Grid>
-                    </Grid>
-                  </CardContent>
-                  <Divider sx={{ backgroundColor: "black" }} />
-
-                  <CardContent>
-                    <Grid container spacing={2}>
-                      <Grid item xs={12}>
-                        {/* Day Title */}
-                        <Typography variant="h6" gutterBottom>
-                          Day 2 | Friday, January 26, 2024 | Sri Ganganagar
-                        </Typography>
-
-                        {/* Starting Time */}
-                        <Typography variant="body1">
-                          Starting time (approximately):{" "}
-                          <strong>5:00 PM</strong>
-                        </Typography>
-
-                        <Typography variant="body1" className="margin-bottom-1">
-                          Venue and host contact details will be disclosed upon
-                          booking.
-                        </Typography>
-
-                        <div
-                          className="info-container"
-                          style={{ marginTop: "20px" }}
-                        >
-                          <label>Accommodation:</label>
-                          <strong>Not included</strong>
-                        </div>
-                        <div className="info-container">
-                          <label>Transportation:</label>
-                          <strong>Not included</strong>
-                        </div>
-
-                        <div
-                          style={{ marginTop: "10px", marginBottom: "10px" }}
-                        >
-                          <Typography
-                            variant="subtitle1"
-                            className="margin-bottom-1"
-                          >
-                            Haldi
-                          </Typography>
-
-                          <Typography
-                            variant="body1"
-                            sx={{ marginBottom: "15px", marginTop: "15px" }}
-                          >
-                            Jaggo is a time for singing and dancing where the
-                            bride's female relatives will dance with pots on
-                            their heads decorated with oil candles. Celebration
-                            includes dancing, food, and enjoyment.
-                          </Typography>
-
-                          {/* Music/Dancing and Dress Code Details */}
-                          <div className="info-container">
-                            <label>Music / Dancing:</label>
-                            <strong>Yes</strong>
-                          </div>
-                          <div className="info-container">
-                            <label>Dress Code:</label>
-                            <strong>Traditional Indian</strong>
-                          </div>
-                        </div>
-                      </Grid>
-                    </Grid>
-                  </CardContent>
-                  <Divider sx={{ backgroundColor: "black" }} />
-                </Card>
+                                      {/* Music/Dancing and Dress Code Details */}
+                                      <div className="info-container">
+                                        <label>Music / Dancing:</label>
+                                        <strong>{row?.music}</strong>
+                                      </div>
+                                      <div className="info-container">
+                                        <label>Dress Code:</label>
+                                        <strong>{row?.dressCode}</strong>
+                                      </div>
+                                    </div>
+                                  </>
+                                );
+                              })}
+                            </Grid>
+                          </Grid>
+                        </CardContent>
+                        <Divider sx={{ backgroundColor: "black" }} />
+                      </Card>
+                    </>
+                  );
+                })}
               </Grid>
             </Grid>
 

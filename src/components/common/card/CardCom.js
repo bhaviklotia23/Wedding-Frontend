@@ -8,6 +8,7 @@ import Image1 from "../../../images/Gallery/gallery7.jpg";
 import Image2 from "../../../images/Gallery/gallery9.jpg";
 import Image3 from "../../../images/Gallery/gallery12.jpg";
 import axios from "axios";
+import moment from "moment";
 
 const CardCom = () => {
   const [allGetWedding, setAllGetWedding] = useState([]);
@@ -44,7 +45,7 @@ const CardCom = () => {
               <CardActionArea>
                 <CardMedia
                   component="img"
-                  image={Image1}
+                  image={item?.photo}
                   alt="green iguana"
                   sx={{ height: "384px", width: "400px", position: "relative" }}
                 />
@@ -61,10 +62,10 @@ const CardCom = () => {
                     backgroundColor: "rgba(0, 0, 0, 0.5)",
                   }}
                 >
-                  {item?.bride?.firstname || "John"}{" "}
-                  {item?.bride?.lastname || "jocky"} &{" "}
-                  {item?.groom?.firstName || "MK"}{" "}
-                  {item?.groom?.lastName || "CK"} WEDDING
+                  {item?.bridefirstname || "John"}{" "}
+                  {item?.bridelastname || "jocky"} &{" "}
+                  {item?.groomfirstName || "MK"} {item?.groomlastName || "CK"}{" "}
+                  WEDDING
                 </Typography>
               </CardActionArea>
               <CardActions>
@@ -75,7 +76,7 @@ const CardCom = () => {
                     fontSize="19px"
                     marginRight="10px"
                   >
-                    Anand,
+                    {item?.city},
                   </Typography>
                   <Typography variant="h6" fontWeight="400" fontSize="18px">
                     {item?.country || "India"},
@@ -88,7 +89,8 @@ const CardCom = () => {
                   fontWeight="400"
                   sx={{ marginLeft: "15px" }}
                 >
-                  21 to 23 Jan, 2024
+                  {moment().format("MMM Do YY", item.weddingstartDate)} to{" "}
+                  {moment().format("MMM Do YY", item.weddingendDate)}
                 </Typography>
               </CardActions>
             </Card>

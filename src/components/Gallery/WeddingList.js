@@ -6,8 +6,11 @@ import Typography from "@mui/material/Typography";
 import { Box, CardActionArea, CardActions } from "@mui/material";
 import Image2 from "../../images/Gallery/gallery7.jpg";
 import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
+import moment from "moment";
 
 const WeddingList = () => {
+  const navigate = useNavigate();
   const [allGetWedding, setAllGetWedding] = useState([]);
 
   const getWeddingDetials = async () => {
@@ -74,21 +77,21 @@ const WeddingList = () => {
                 gap: "20px",
               }}
             >
-              {allGetWedding.map((item, index) => (
-                <Card
-                  key={index}
-                  sx={{ maxWidth: 345, width: "30%", marginBottom: "20px" }}
-                >
+              {allGetWedding?.map((item, index) => (
+                <Card sx={{ maxWidth: 345, maxHeight: 500 }}>
                   <CardActionArea>
                     <CardMedia
                       component="img"
-                      image={Image2}
-                      alt="wedding"
+                      image={item?.photo}
+                      alt="green iguana"
                       sx={{
                         height: "384px",
-                        width: "100%",
+                        width: "400px",
                         position: "relative",
                       }}
+                      onClick={() =>
+                        navigate("/weddingDetails", { state: { item } })
+                      }
                     />
 
                     <Typography
@@ -103,10 +106,10 @@ const WeddingList = () => {
                         backgroundColor: "rgba(0, 0, 0, 0.5)",
                       }}
                     >
-                      {item?.bride?.firstname || "John"}{" "}
-                      {item?.bride?.lastname || "jocky"} &{" "}
-                      {item?.groom?.firstName || "MK"}{" "}
-                      {item?.groom?.lastName || "CK"} WEDDING
+                      {item?.bridefirstname || "John"}{" "}
+                      {item?.bridelastname || "jocky"} &{" "}
+                      {item?.groomfirstName || "MK"}{" "}
+                      {item?.groomlastName || "CK"} WEDDING
                     </Typography>
                   </CardActionArea>
                   <CardActions>
@@ -117,19 +120,21 @@ const WeddingList = () => {
                         fontSize="19px"
                         marginRight="10px"
                       >
-                        Anand,
+                        {item?.city},
                       </Typography>
                       <Typography variant="h6" fontWeight="400" fontSize="18px">
                         {item?.country || "India"},
                       </Typography>
                     </Box>
+
                     <Typography
                       variant="h6"
                       fontSize="19px"
                       fontWeight="400"
                       sx={{ marginLeft: "15px" }}
                     >
-                      21 to 23 Jan, 2024
+                      {moment().format("MMM Do YY", item.weddingstartDate)} to{" "}
+                      {moment().format("MMM Do YY", item.weddingendDate)}
                     </Typography>
                   </CardActions>
                 </Card>
