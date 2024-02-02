@@ -10,8 +10,6 @@ const EventForm = ({ count, index }) => {
   const { values, errors, touched, handleChange, handleBlur, setFieldValue } =
     useFormikContext();
 
-  console.log("valuesEvenrt", values);
-
   const handleMainChange = (event, index, field) => {
     const updatedWeddingDetails = [...values.weddingDetails];
     const fieldsToUpdate = ["eventName", "description", "dressCode", "music"];

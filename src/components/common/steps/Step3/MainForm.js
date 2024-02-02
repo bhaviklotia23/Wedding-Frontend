@@ -12,7 +12,6 @@ import DynamicAccordions from "../../../../pages/Test/Test";
 const MainForm = ({ index }) => {
   const { values, errors, touched, handleChange, handleBlur, setFieldValue } =
     useFormikContext();
-  console.log("values", values);
 
   // const handleIncrement = () => {
   //   if (values.totalEvents < 5) {

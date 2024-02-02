@@ -27,12 +27,14 @@ const StepperForm = () => {
   // const eventCount = values.eventCount || 1;
 
   const initialValues = {
-    groomFirstName: "",
-    groomLastName: "",
-    groomPhoneNumber: "",
-    brideFirstName: "",
-    brideLastName: "",
-    bridePhoneNumber: "",
+    groomfirstName: "",
+    groomlastName: "",
+    groomemail: "",
+    groomphoneNumber: "",
+    bridefirstname: "",
+    bridelastname: "",
+    brideemail: "",
+    bridephoneNumber: "",
     story: "",
     guidefirstname: "",
     guidelastname: "",
@@ -76,6 +78,7 @@ const StepperForm = () => {
     //   })),
     // })),
   };
+
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -87,12 +90,14 @@ const StepperForm = () => {
   const handleSubmit = async (values) => {
     try {
       const {
-        groomFirstName,
-        groomLastName,
-        groomPhoneNumber,
-        brideFirstName,
-        brideLastName,
-        bridePhoneNumber,
+        groomfirstName,
+        groomlastName,
+        groomemail,
+        groomphoneNumber,
+        bridefirstname,
+        bridelastname,
+        brideemail,
+        bridephoneNumber,
         url,
         foodOffered,
         alcohol,
@@ -106,26 +111,23 @@ const StepperForm = () => {
         guidephoneNumber,
         guiderealtionship,
       } = values;
+      console.log("values111111111111!", values);
 
       // Creating the payload
       const payload = {
-        groom: {
-          groomFirstName,
-          groomLastName,
-          groomPhoneNumber,
-        },
-        bride: {
-          brideFirstName,
-          brideLastName,
-          bridePhoneNumber,
-        },
-        guide: {
-          guidefirstname,
-          guidelastname,
-          guideemail,
-          guidephoneNumber,
-          guiderealtionship,
-        },
+        groomfirstName,
+        groomlastName,
+        groomemail,
+        groomphoneNumber,
+        bridefirstname,
+        bridelastname,
+        brideemail,
+        bridephoneNumber,
+        guidefirstname,
+        guidelastname,
+        guideemail,
+        guidephoneNumber,
+        guiderealtionship,
         url,
         foodOffered,
         alcohol,
