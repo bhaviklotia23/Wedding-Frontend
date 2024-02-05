@@ -34,36 +34,36 @@ const Step1 = () => {
         >
           <TextField
             color="warning"
-            id="groomFirstName"
-            name="groomFirstName"
+            id="groomfirstName"
+            name="groomfirstName"
             label="First Name"
-            value={values.groomFirstName}
+            value={values.groomfirstName}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={touched.groomFirstName && Boolean(errors.groomFirstName)}
-            helperText={touched.groomFirstName && errors.groomFirstName}
+            error={touched.groomfirstName && Boolean(errors.groomfirstName)}
+            helperText={touched.groomfirstName && errors.groomfirstName}
           />
           <TextField
             color="warning"
-            id="groomLastName"
-            name="groomLastName"
+            id="groomlastName"
+            name="groomlastName"
             label="Last Name"
-            value={values.groomLastName}
+            value={values.groomlastName}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={touched.groomLastName && Boolean(errors.groomLastName)}
-            helperText={touched.groomLastName && errors.groomLastName}
+            error={touched.groomlastName && Boolean(errors.groomlastName)}
+            helperText={touched.groomlastName && errors.groomlastName}
           />
           <TextField
             color="warning"
-            id="groomPhoneNumber"
-            name="groomPhoneNumber"
+            id="groomphoneNumber"
+            name="groomphoneNumber"
             label="Phone Number"
-            value={values.groomPhoneNumber}
+            value={values.groomphoneNumber}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={touched.groomPhoneNumber && Boolean(errors.groomPhoneNumber)}
-            helperText={touched.groomPhoneNumber && errors.groomPhoneNumber}
+            error={touched.groomphoneNumber && Boolean(errors.groomphoneNumber)}
+            helperText={touched.groomphoneNumber && errors.groomphoneNumber}
           />
         </Stack>
       </Box>
@@ -85,34 +85,34 @@ const Step1 = () => {
         >
           <TextField
             color="warning"
-            id="brideFirstName"
-            name="brideFirstName"
+            id="bridefirstname"
+            name="bridefirstname"
             label="First Name"
-            value={values.brideFirstName}
+            value={values.bridefirstname}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={touched.brideFirstName && Boolean(errors.brideFirstName)}
-            helperText={touched.brideFirstName && errors.brideFirstName}
+            error={touched.bridefirstname && Boolean(errors.bridefirstname)}
+            helperText={touched.bridefirstname && errors.bridefirstname}
           />
           <TextField
-            id="brideLastName"
-            name="brideLastName"
+            id="bridelastname"
+            name="bridelastname"
             label="Last Name"
-            value={values.brideLastName}
+            value={values.bridelastname}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={touched.brideLastName && Boolean(errors.brideLastName)}
-            helperText={touched.brideLastName && errors.brideLastName}
+            error={touched.bridelastname && Boolean(errors.bridelastname)}
+            helperText={touched.bridelastname && errors.bridelastname}
           />
           <TextField
-            id="bridePhoneNumber"
-            name="bridePhoneNumber"
+            id="bridephoneNumber"
+            name="bridephoneNumber"
             label="Phone Number"
-            value={values.bridePhoneNumber}
+            value={values.bridephoneNumber}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={touched.bridePhoneNumber && Boolean(errors.bridePhoneNumber)}
-            helperText={touched.bridePhoneNumber && errors.bridePhoneNumber}
+            error={touched.bridephoneNumber && Boolean(errors.bridephoneNumber)}
+            helperText={touched.bridephoneNumber && errors.bridephoneNumber}
           />
         </Stack>
       </Box>
